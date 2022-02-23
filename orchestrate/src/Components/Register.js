@@ -32,6 +32,10 @@ export function Register() {
           <input type="password" placeholder="password" required />
         </label>
         <br></br>
+        <label>
+          City:
+          <input type="text" placeholder="city" required />
+        </label>
         <button onSubmit={handleSubmit} type="submit">
           Sign-up
         </button>

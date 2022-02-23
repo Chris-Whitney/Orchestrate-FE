@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const orchestrateApi = axios.create({
-  baseURL: "https://co-orchestrate.herokuapp.com/",
+  baseURL: "https://orchestrate-co.herokuapp.com/",
 });
 
 export const getAllGroups = () => {
