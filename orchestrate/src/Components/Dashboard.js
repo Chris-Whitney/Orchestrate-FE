@@ -1,6 +1,7 @@
 import "../Styling/Dashboard.css"
 import { useEffect, useState } from "react";
 import { getAllGroups } from "../Utils/api";
+import { Events } from './Events'
 
 export function Dashboard() {
   const [groups, setGroups] = useState([]);
@@ -25,6 +26,7 @@ export function Dashboard() {
               )
           })}
       </ul>
+      <Events/>
     </div>
   );
 }
