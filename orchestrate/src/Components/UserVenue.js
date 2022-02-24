@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getVenueById } from "../Utils/api";
 import { UserContext } from "../Utils/User";
+import { getUserVenues } from "../Utils/api"
 
 export function UserVenue() {
   const { loggedUser } = useContext(UserContext);
@@ -9,23 +10,21 @@ export function UserVenue() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [venues, setVenues] = useState([]);
-
+  const [newVenue, setNewVenue] = useState([])
   const handleClick = () => {
     navigate("/venues");
   };
 
   useEffect(() => {
-    loggedUser.venues.map((venue) => {
-      getVenueById(venue.$oid).then((res) => {
-        setVenues((currVenue) => {
-          console.log(currVenue,"<<<curr")
-           const newVenue = [res, ...currVenue] 
-           return newVenue
-        })
-      })
+    getUserVenues(loggedUser._id.$oid).then((res) => {
+      console.log(res)
+      setNewVenue(res)
+      setLoading(true)
     })
-
+    .catch((err)=> {
+      console.log(err)
+    })
+    
   }, []);
 
   return (
@@ -38,25 +37,27 @@ export function UserVenue() {
       </button>
       {loading ? (
         <div>
-          {loggedUser.venues.map((venue) => {
+          <ul>
+          {newVenue.map((venue) => {
 
             return (
-              <ul>
-                <li>
+              
+                <li key={`v${venue._id}`}>
                   {
-                    <Link to={`/venues/${venue.$oid}`}>
-                      <p>{venues.name}</p>
-                      <p>{venues.location.city}</p>
-                      <p>{venues.contact.email}</p>
-                      <img src={venues.avatar_url} />
+                    <Link to={`/venues/${venue._id}`}>
+                      <p>{venue.name}</p>
+                      <p>{venue.location.city}</p>
+                      <p>{venue.contact.email}</p>
+                      <img src={venue.avatar_url} />
                     </Link>
                   }
                 </li>
-              </ul>
+             
             );
           })}
+           </ul>
         </div>
-      ) : null}
+      ) : <div><h3>loading</h3></div>}
     </div>
   );
 }

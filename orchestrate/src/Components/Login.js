@@ -1,9 +1,13 @@
 import "../Styling/Login.css";
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { login } from "../Utils/api";
+import { UserContext } from "../Utils/User";
+
 
 export function Login() {
+
+const { setLoggedUser } = useContext(UserContext);  
 
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -21,7 +25,7 @@ export function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(usernameInput, passwordInput).then((res) => {
-        console.log(res,"<<res")
+        setLoggedUser(res)
     })
     // if verify is user then navigate to dashboard
     // else msg : user does not exist, click Register if you don't have an account

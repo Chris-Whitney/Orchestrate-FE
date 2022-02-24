@@ -10,6 +10,14 @@ export const getAllGroups = () => {
   });
 };
 
+
+
+export const getUserVenues = (id) => {
+  return orchestrateApi.get(`api/users/${id}/venues`).then((res) => {
+    return res.data.venues;
+  })
+}
+
 export const getVenueById = (id) => {
   return orchestrateApi.get(`api/venues/${id}`).then((res) => {
     return res.data.venue
