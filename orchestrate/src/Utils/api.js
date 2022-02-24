@@ -10,6 +10,12 @@ export const getAllGroups = () => {
   });
 };
 
+export const getVenueById = (id) => {
+  return orchestrateApi.get(`api/venues/${id}`).then((res) => {
+    return res.data.venue
+  })
+};
+
 export const login = (username, password) => {
   return orchestrateApi.post("login", { username, password }).then((res) => {
       console.log(res, '<<api')

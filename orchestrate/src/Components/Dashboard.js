@@ -1,6 +1,7 @@
 import "../Styling/Dashboard.css"
 import { useEffect, useState } from "react";
 import { getAllGroups } from "../Utils/api";
+import { UserVenue } from "./UserVenue";
 
 export function Dashboard() {
   const [groups, setGroups] = useState([]);
@@ -17,7 +18,7 @@ export function Dashboard() {
       <ul>
           {groups.map((group) => {
               return (
-                  <li>
+                  <li key={group.name}>
                       <h2>
                           {group.name}
                       </h2>
@@ -25,6 +26,7 @@ export function Dashboard() {
               )
           })}
       </ul>
+      <UserVenue />
     </div>
   );
 }
