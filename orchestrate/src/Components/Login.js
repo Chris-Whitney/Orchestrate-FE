@@ -38,12 +38,12 @@ export function Login() {
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <p>Please enter your username and password</p>
-        <div class="uk-inline">
-          <span class="uk-form-icon" uk-icon="icon: user"></span>
+        <div className="uk-inline">
+          <span className="uk-form-icon" uk-icon="icon: user"></span>
           <input onChange={handleChangeUser} type="text" required></input>
         </div>
-        <div class="uk-inline">
-          <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+        <div className="uk-inline">
+          <span className="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
           <input onChange={handleChangePass} type="password" required></input>
         </div>
         <button type="submit">Login</button>

@@ -1,29 +1,43 @@
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import { Calendar } from 'react-modern-calendar-datepicker';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { setUserEvent } from '../Utils/api'
 import { differenceInCalendarDays, startOfToday, startOfTomorrow } from 'date-fns';
+import { UserContext } from '../Utils/User'
 
 export function Events() {
 
+    const [eventList, setEventList] = useState([{"to":{"day":16,"year":2022,"month":2},"from":{"day":15,"year":2022,"month":2},"_id":"6218bac3a2f71bdf9b0a8347"},{"to":{"day":16,"year":2022,"month":2},"from":{"day":15,"year":2022,"month":2},"_id":"6218bafca2f71bdf9b0a8353"},{"to":{"day":16,"year":2022,"month":2},"from":{"day":15,"year":2022,"month":2},"_id":"6218bb42a2f71bdf9b0a8368"}])
+    const { loggedUser } = useContext(UserContext)
+    const [isLoading, setIsLoading] = useState(true)
     const [selectedDayRange, setSelectedDayRange] = useState({
         from: null,
         to: null
     });
     const updateEvents = () => {
-        console.log('here')
-        setUserEvent().then(res => {
-            console.log(res)
+        setUserEvent(selectedDayRange, loggedUser._id.$oid).then((res) => {
+        setEventList(res)
+        setIsLoading(false)
         })
     }
-    console.log(selectedDayRange)
+
+    useEffect(() => {
+    })
+
     return (
         <div>
-            <h4>Event Componant</h4>
-            <div class="uk-flex uk-flex-center">
-                <div class="uk-card uk-card-default uk-card-body">Event</div>
-                <div class="uk-card uk-card-primary uk-card-body uk-margin-left">Event</div>
-                <div class="uk-card uk-card-secondary uk-card-body uk-margin-left">Event</div>
+            <h4>Event Component</h4>
+            <div className="uk-flex uk-flex-center">
+                {isLoading 
+                ? eventList.map((event) => {
+                    console.log(eventList.length)
+                    const from = event.from
+                    const to = event.to
+                    return ( <div key={event._id} className="uk-card uk-card-default uk-card-body">{`from ${from.day}/${from.month}/${from.year}`}<br/>{`to ${to.day}/${to.month}/${to.year}`}</div>
+                    )
+                })
+                : <p>Loading</p>
+                }
             </div>
             <ul data-uk-accordion>
                 <li>
@@ -31,7 +45,7 @@ export function Events() {
                         Add Event <span uk-icon="calendar"></span>
                     </button>
                     <div className="uk-accordion-content">
-                        <div class="uk-flex uk-flex-center">
+                        <div className="uk-flex uk-flex-center">
                             <Calendar
                                 value={selectedDayRange}
                                 onChange={setSelectedDayRange}
@@ -56,7 +70,7 @@ export function Events() {
                                         </button>
                                         <button className='uk-margin-left uk-button uk-button-primary uk-button-small'
                                             type="button"
-                                            onClick={() => updateEvents}
+                                            onClick={() => {updateEvents()}}
                                         >
                                             Add Event
                                         </button>

@@ -16,7 +16,7 @@ export const setUserEvent = (dates, id) => {
     from: dates.from,
     to: dates.to
   }).then(res => {
-    return res.data.events
+    return res.data.event
   })
 }
 

@@ -54,7 +54,7 @@ export function UserVenue() {
           </ul>
         </div>
       ) : (
-        <div uk-spinner></div>
+        null
       )}
     </div>
   );
