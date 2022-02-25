@@ -111,3 +111,9 @@ export const getUserEvents = (id) => {
       return res.data.events
     })
 }
+
+export const removeEvent = (id, uId) => {
+  return orchestrateApi.delete(`api/users${uId}/events/${id}`).then((res) => {
+    return true
+  })
+}
