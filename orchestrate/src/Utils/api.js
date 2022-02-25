@@ -11,6 +11,15 @@ export const getSingleUser = (id) => {
   });
 };
 
+export const setUserEvent = (dates, id) => {
+  return orchestrateApi.post(`api/users/${id}/events`, {
+    from: dates.from,
+    to: dates.to
+  }).then(res => {
+    return res.data.events
+  })
+}
+
 export const getAllGroups = () => {
   return orchestrateApi.get("api/groups").then((res) => {
     return res.data.groups;
