@@ -14,8 +14,9 @@ export const getSingleUser = (id) => {
   }
 };
 
-export const setUserEvent = (dates, id) => {
+export const setUserEvent = (dates, id, title) => {
   return orchestrateApi.post(`api/users/${id}/events`, {
+    title,
     from: dates.from,
     to: dates.to
   }).then(res => {
@@ -110,3 +111,15 @@ export const postNewUser = (user) => {
       console.log(err);
     });
 };
+
+export const getUserEvents = (id) => {
+    return orchestrateApi.get(`api/users/${id}/events`).then((res) => {
+      return res.data.events
+    })
+}
+
+export const removeEvent = (id, uId) => {
+  return orchestrateApi.delete(`api/users${uId}/events/${id}`).then((res) => {
+    return true
+  })
+}
