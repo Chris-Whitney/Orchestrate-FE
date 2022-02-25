@@ -9,6 +9,7 @@ import { UserContext } from "./Utils/User";
 import { SingleVenue } from "./Components/SingleVenue";
 import { Venues } from "./Components/Venues";
 import { Groups } from "./Components/Groups";
+import { SingleGroup } from "./Components/SingleGroup";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState({
@@ -60,6 +61,7 @@ function App() {
             <Route path='/venues' element={<Venues />} />
             <Route path='/venues/:_id' element={<SingleVenue />} />
             <Route path='/groups' element={<Groups />} />
+            <Route path='/groups/:_id' element={<SingleGroup />} />
           </Routes>
         </div>
       </UserContext.Provider>
