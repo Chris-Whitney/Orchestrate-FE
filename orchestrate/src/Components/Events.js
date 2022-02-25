@@ -11,6 +11,7 @@ export function Events() {
         to: null
     });
     const updateEvents = () => {
+        console.log('here')
         setUserEvent().then(res => {
             console.log(res)
         })
@@ -55,7 +56,7 @@ export function Events() {
                                         </button>
                                         <button className='uk-margin-left uk-button uk-button-primary uk-button-small'
                                             type="button"
-                                            onClick={() => { }}
+                                            onClick={() => updateEvents}
                                         >
                                             Add Event
                                         </button>
