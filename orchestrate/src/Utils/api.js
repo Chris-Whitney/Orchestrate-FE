@@ -5,9 +5,26 @@ const orchestrateApi = axios.create({
 });
 
 export const getSingleUser = (id) => {
-  console.log(id);
   return orchestrateApi.get(`api/users/${id}`).then((res) => {
     return res.data.user;
+  });
+};
+
+export const getSingleGroup = (id) => {
+  return orchestrateApi.get(`api/groups/${id}`).then((res) => {
+    return res.data.group;
+  });
+};
+
+export const getGroupOwner = (id) => {
+  return orchestrateApi.get(`api/groups/${id}/owner`).then((res) => {
+    return res.data;
+  });
+};
+
+export const getSingleGroupMembers = (id) => {
+  return orchestrateApi.get(`api/groups/${id}/members`).then((res) => {
+    return res.data.members;
   });
 };
 
