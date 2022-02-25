@@ -31,7 +31,7 @@ export const getSingleGroup = (id) => {
 
 export const getGroupOwner = (id) => {
   return orchestrateApi.get(`api/groups/${id}/owner`).then((res) => {
-    return res.data;
+    return res.data.owner;
   });
 };
 
