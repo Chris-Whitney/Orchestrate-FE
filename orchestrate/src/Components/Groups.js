@@ -14,9 +14,9 @@ export function Groups() {
     });
   }, []);
 
-  useEffect(() => {
-    getSingleUser();
-  });
+  // useEffect(() => {
+  //   getSingleUser();
+  // });
 
   return (
     <div>
@@ -46,7 +46,8 @@ export function Groups() {
             })}
           </ul>
         </div>
-      ) : null}
+      ) : <div uk-spinner></div>
+      }
     </div>
   );
 }

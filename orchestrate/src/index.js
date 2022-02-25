@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import UIkit from 'uikit';
-import "uikit/dist/css/uikit-core.min.css";
+import "uikit/dist/css/uikit-core.css";
 
 ReactDOM.render(
   <React.StrictMode>

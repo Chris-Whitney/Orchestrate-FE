@@ -29,7 +29,7 @@ export function UserVenue() {
   return (
     <div>
       <div>
-        <h1>venue</h1>
+        <h4>venue componant</h4>
       </div>
       <button type='button' onClick={handleClick}>
         Find Venues
@@ -54,9 +54,7 @@ export function UserVenue() {
           </ul>
         </div>
       ) : (
-        <div>
-          <h3>loading</h3>
-        </div>
+        null
       )}
     </div>
   );

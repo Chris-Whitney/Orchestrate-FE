@@ -3,51 +3,27 @@ import { useParams } from "react-router-dom";
 import {
   getGroupOwner,
   getSingleGroup,
-  getSingleGroupMembers,
-  getSingleUser,
+  getSingleGroupMembers
+  
 } from "../Utils/api";
 
 export function SingleGroup() {
   const { _id } = useParams();
   const [singleGroup, setSingleGroup] = useState({});
   const [loading, setLoading] = useState(false);
-  const [owner, setOwner] = useState("");
+  const [owner, setOwner] = useState({});
   const [members, setMembers] = useState([]);
 
-  useEffect(() => {
-    getSingleGroup(_id)
-      .then((singleGroupApi) => {
-        console.log(singleGroupApi);
-        setSingleGroup(singleGroupApi);
-      })
-      .then(() => {
-        console.log(singleGroup._id, "<<<group  id");
+  useEffect( async() => {
+    const group = await getSingleGroup(_id)
+    setSingleGroup(group)
+    const creator = await getGroupOwner(_id)
+    setOwner(creator)
+    const groupMembs = await getSingleGroupMembers(_id)
+    setMembers(groupMembs)
+    setLoading(true)
+}, [_id]);
 
-        // const singleUser = getSingleUser(singleGroup.owner);
-        // //    .then((ownerApi) => {
-        // //       console.log(owner, "<<<owner");
-        // //       setOwner(`${ownerApi.name.first} ${ownerApi.name.last}`);
-        // //       //   setLoading(true);
-        // //     });
-
-        // const singleGroupMembers = getSingleGroupMembers(singleGroup._id);
-        // // .then((membersApi) => {
-        // //   console.log(membersApi);
-        // //   setMembers(membersApi);
-        // //   setLoading(true);
-        // });
-        // Promise.all([singleUser, singleGroupMembers]).then(
-        //   ([promise1Result, promise2Result]) => {
-        //     console.log(promise1Result, "<<1");
-        //     console.log(promise2Result, "<<2");
-        //   }
-        // );
-      })
-
-      .catch((err) => console.log(err));
-  }, [_id]);
-
-  useEffect(() => {}, []);
 
   return (
     <div>
@@ -59,8 +35,10 @@ export function SingleGroup() {
             alt={`${singleGroup.name} picture`}
             style={{ height: "200px", width: "400px" }}
           />
-          <p>Created by : {owner}</p>
-          <ul></ul>
+          <p>Created by : {owner.name.first} {owner.name.last}</p>
+          <ul>{members.map((member) => {
+            return <li><img src={member.avatar_url}/><br/>{member.name.first} {member.name.last}</li>
+          })}</ul>
         </>
       ) : (
         <p>....Loading</p>

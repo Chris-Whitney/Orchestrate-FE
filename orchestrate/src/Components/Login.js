@@ -7,13 +7,13 @@ import { UserContext } from "../Utils/User";
 
 export function Login() {
 
-const { setLoggedUser } = useContext(UserContext);  
+  const { setLoggedUser } = useContext(UserContext);
 
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
   const handleChangeUser = (e) => {
-      console.log(e.target.value)
+    console.log(e.target.value)
     setUsernameInput(e.target.value)
   };
 
@@ -25,7 +25,7 @@ const { setLoggedUser } = useContext(UserContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     login(usernameInput, passwordInput).then((res) => {
-        setLoggedUser(res)
+      setLoggedUser(res)
     })
     // if verify is user then navigate to dashboard
     // else msg : user does not exist, click Register if you don't have an account
@@ -38,12 +38,18 @@ const { setLoggedUser } = useContext(UserContext);
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <p>Please enter your username and password</p>
-        <input onChange={handleChangeUser} type="text" placeholder="username" required></input>
-        <input onChange={handleChangePass} type="password" placeholder="password" required></input>
+        <div className="uk-inline">
+          <span className="uk-form-icon" uk-icon="icon: user"></span>
+          <input onChange={handleChangeUser} type="text" required></input>
+        </div>
+        <div className="uk-inline">
+          <span className="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+          <input onChange={handleChangePass} type="password" required></input>
+        </div>
         <button type="submit">Login</button>
-      </form>
+      </form >
       <p>Don't have an account?</p>
       <p><a href="/register">Register</a> now, it's quick and easy to get started!</p>
-    </div>
+    </div >
   );
 }
