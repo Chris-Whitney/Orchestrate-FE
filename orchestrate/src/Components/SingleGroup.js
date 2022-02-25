@@ -21,7 +21,7 @@ export function SingleGroup() {
         setSingleGroup(singleGroupApi);
       })
       .then(() => {
-        console.log(singleGroup._id, "<<<group id");
+        console.log(singleGroup._id, "<<<group  id");
 
         // const singleUser = getSingleUser(singleGroup.owner);
         // //    .then((ownerApi) => {
