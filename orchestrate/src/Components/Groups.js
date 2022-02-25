@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllGroups, getSingleUser } from "../Utils/api";
+import { CreateGroup } from "./CreateGroup";
 
 export function Groups() {
   const [allGroups, setAllGroups] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [toggleCreateGroup, setToggleCreateGroup] = useState(false)
+
+  const handleClick = () => {
+      setToggleCreateGroup(true)
+  }
 
   useEffect(() => {
     getAllGroups().then((groups) => {
@@ -14,14 +20,16 @@ export function Groups() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   getSingleUser();
-  // });
-
   return (
     <div>
       {loading ? (
         <div>
+          <div>
+           <button onClick={handleClick}>
+             Create Group
+           </button>
+          </div>
+          {/* {toggleCreateGroup ? <CreateGroup /> : null } */}
           <ul>
             {allGroups.map((group) => {
               return (

@@ -3,8 +3,7 @@ import { useParams } from "react-router-dom";
 import {
   getGroupOwner,
   getSingleGroup,
-  getSingleGroupMembers
-  
+  getSingleGroupMembers,
 } from "../Utils/api";
 
 export function SingleGroup() {
@@ -14,16 +13,15 @@ export function SingleGroup() {
   const [owner, setOwner] = useState({});
   const [members, setMembers] = useState([]);
 
-  useEffect( async() => {
-    const group = await getSingleGroup(_id)
-    setSingleGroup(group)
-    const creator = await getGroupOwner(_id)
-    setOwner(creator)
-    const groupMembs = await getSingleGroupMembers(_id)
-    setMembers(groupMembs)
-    setLoading(true)
-}, [_id]);
-
+  useEffect(async () => {
+    const group = await getSingleGroup(_id);
+    setSingleGroup(group);
+    const creator = await getGroupOwner(_id);
+    setOwner(creator);
+    const groupMembs = await getSingleGroupMembers(_id);
+    setMembers(groupMembs);
+    setLoading(true);
+  }, [_id]);
 
   return (
     <div>
@@ -35,10 +33,30 @@ export function SingleGroup() {
             alt={`${singleGroup.name} picture`}
             style={{ height: "200px", width: "400px" }}
           />
-          <p>Created by : {owner.name.first} {owner.name.last}</p>
-          <ul>{members.map((member) => {
-            return <li><img src={member.avatar_url}/><br/>{member.name.first} {member.name.last}</li>
-          })}</ul>
+          <p>
+            Created by : {owner.name.first} {owner.name.last}
+          </p>
+          <ul>
+            {members.length === 1 ? (
+              <p>member</p>
+            ) : members.length === 0 ? (
+              <p>No members</p>
+            ) : (
+              <p>members</p>
+            )}
+            {members.map((member) => {
+              return (
+                <li>
+                  <img
+                    style={{ height: "200px", width: "400px" }}
+                    src={member.avatar_url}
+                  />
+                  <br />
+                  {member.name.first} {member.name.last}
+                </li>
+              );
+            })}
+          </ul>
         </>
       ) : (
         <p>....Loading</p>

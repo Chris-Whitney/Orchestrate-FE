@@ -31,7 +31,7 @@ export function UserVenue() {
       <div>
         <h4>venue componant</h4>
       </div>
-      <button type='button' onClick={handleClick}>
+      <button type="button" onClick={handleClick}>
         Find Venues
       </button>
       {loading ? (
@@ -53,9 +53,7 @@ export function UserVenue() {
             })}
           </ul>
         </div>
-      ) : (
-        null
-      )}
+      ) : null}
     </div>
   );
 }

@@ -10,6 +10,8 @@ import { SingleVenue } from "./Components/SingleVenue";
 import { Venues } from "./Components/Venues";
 import { Groups } from "./Components/Groups";
 import { SingleGroup } from "./Components/SingleGroup";
+import { Header } from './Components/Header';
+import { Footer } from './Components/Footer'
 
 function App() {
   const [loggedUser, setLoggedUser] = useState({
@@ -53,6 +55,7 @@ function App() {
     <BrowserRouter>
       <UserContext.Provider value={{ loggedUser, setLoggedUser, isLoggedIn }}>
         <div className='App'>
+          <Header />
           <Routes>
             <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />
@@ -64,6 +67,7 @@ function App() {
             <Route path='/groups/:_id' element={<SingleGroup />} />
           </Routes>
         </div>
+        <Footer />
       </UserContext.Provider>
     </BrowserRouter>
   );

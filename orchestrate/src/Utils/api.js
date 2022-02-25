@@ -47,6 +47,12 @@ export const getAllGroups = () => {
   });
 };
 
+export const getAllVenues = () => {
+  return orchestrateApi.get('api/venues').then((res) => {
+    return res.data.venues;
+  })
+}
+
 export const getUserGroups = (id) => {
   return orchestrateApi.get(`api/users/${id.$oid}/groups`).then((res) => {
     return res.data.groups;
