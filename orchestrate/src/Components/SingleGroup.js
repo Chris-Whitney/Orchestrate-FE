@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  getGroupOwner,
-  getSingleGroup,
-  getSingleGroupMembers,
-  getSingleUser,
+  getSingleGroup
+  
 } from "../Utils/api";
 
 export function SingleGroup() {
   const { _id } = useParams();
   const [singleGroup, setSingleGroup] = useState({});
   const [loading, setLoading] = useState(false);
-  const [owner, setOwner] = useState("");
+  const [owner, setOwner] = useState(null);
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
     getSingleGroup(_id)
-      .then((singleGroupApi) => {
-        console.log(singleGroupApi);
-        setSingleGroup(singleGroupApi);
+      .then((group) => {
+        console.log(group);
+        setSingleGroup(group);
+        return singleGroup
       })
-      .then(() => {
-        console.log(singleGroup._id, "<<<group  id");
 
         // const singleUser = getSingleUser(singleGroup.owner);
         // //    .then((ownerApi) => {
@@ -59,7 +56,7 @@ export function SingleGroup() {
             alt={`${singleGroup.name} picture`}
             style={{ height: "200px", width: "400px" }}
           />
-          <p>Created by : {owner}</p>
+          {/* <p>Created by : {owner}</p> */}
           <ul></ul>
         </>
       ) : (

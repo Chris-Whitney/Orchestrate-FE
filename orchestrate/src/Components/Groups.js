@@ -14,9 +14,9 @@ export function Groups() {
     });
   }, []);
 
-  useEffect(() => {
-    getSingleUser();
-  });
+  // useEffect(() => {
+  //   getSingleUser();
+  // });
 
   return (
     <div>

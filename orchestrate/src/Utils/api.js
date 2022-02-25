@@ -5,9 +5,13 @@ const orchestrateApi = axios.create({
 });
 
 export const getSingleUser = (id) => {
+  if (id === undefined) {
+    console.log('no ID')}
+  else {
   return orchestrateApi.get(`api/users/${id}`).then((res) => {
     return res.data.user;
   });
+  }
 };
 
 export const setUserEvent = (dates, id) => {
@@ -20,6 +24,7 @@ export const setUserEvent = (dates, id) => {
 }
 export const getSingleGroup = (id) => {
   return orchestrateApi.get(`api/groups/${id}`).then((res) => {
+    console.log(res.data.group, '<<<res.data.group')
     return res.data.group;
   });
 };
