@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function Register() {
+const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,6 +20,10 @@ export function Register() {
             profile_img: e.target[8].value
           }
         postNewUser(user)
+  }
+
+  const handleClick = () => {
+    navigate('/login')
   }
 
   return (
@@ -71,7 +76,7 @@ export function Register() {
           <input type="file" placeholder="profile-img" name='profile-img' />
         </label>
         <br></br>
-        <button type="submit">
+        <button onClick={handleClick}type="submit">
           Sign-up
         </button>
       </form>
