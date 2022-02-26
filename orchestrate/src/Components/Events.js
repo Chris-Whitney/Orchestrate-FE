@@ -18,24 +18,24 @@ export function Events() {
     const [refresh, setRefresh] = useState(false)
 
     const updateEvents = () => {
-        setUserEvent(selectedDayRange, loggedUser._id.$oid, eventTitle).then(() => {
+        setUserEvent(selectedDayRange, loggedUser._id, eventTitle).then(() => {
             setRefresh(!refresh)
-            
+
         })
     }
-    
+
     const inputHandler = (event) => {
         setEventTitle(event.target.value)
     }
 
     const deleteEvent = (id) => {
-        removeEvent(id, loggedUser._id.$oid).then(() => {
+        removeEvent(id, loggedUser._id).then(() => {
             setRefresh(!refresh)
         })
     }
-    
+
     useEffect(() => {
-        getUserEvents(loggedUser._id.$oid).then((events) => {
+        getUserEvents(loggedUser._id).then((events) => {
             setEventList(events)
             setIsLoading(false)
         })
@@ -45,21 +45,21 @@ export function Events() {
         <div>
             <h4>Event Component</h4>
             <div className="uk-flex uk-flex-center">
-                {!isLoading 
-                ? eventList.map((event) => {
-                    const { title = 'rehearsal'} = event 
-                    const from = event.from
-                    const to = event.to
-                    return (
+                {!isLoading
+                    ? eventList.map((event) => {
+                        const { title = 'rehearsal' } = event
+                        const from = event.from
+                        const to = event.to
+                        return (
                             <div key={event._id} className="uk-card uk-card-default uk-card-body">
-                            {title}
-                            <br/>{`from ${from.day}/${from.month}/${from.year}`}<br/>
-                            {`to ${to.day}/${to.month}/${to.year}`}
-                            <div><button onClick={deleteEvent(event._id)}>X</button></div>
+                                {title}
+                                <br />{`from ${from.day}/${from.month}/${from.year}`}<br />
+                                {`to ${to.day}/${to.month}/${to.year}`}
+                                <div><button onClick={deleteEvent(event._id)}>X</button></div>
                             </div>
-                    )
-                })
-                : <p>Loading</p>
+                        )
+                    })
+                    : <p>Loading</p>
                 }
             </div>
             <ul data-uk-accordion>
@@ -93,7 +93,7 @@ export function Events() {
                                         </button>
                                         <button className='uk-margin-left uk-button uk-button-primary uk-button-small'
                                             type="button"
-                                            onClick={() => {updateEvents()}}
+                                            onClick={() => { updateEvents() }}
                                         >
                                             Add Event
                                         </button>

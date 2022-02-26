@@ -9,42 +9,33 @@ import { UserContext } from "./Utils/User";
 import { SingleVenue } from "./Components/SingleVenue";
 import { Venues } from "./Components/Venues";
 import { Groups } from "./Components/Groups";
-import { SingleGroup } from "./Components/SingleGroup";
+import { Events } from "./Components/Events";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState({
-    _id: {
-      $oid: "620fb8208aa0f467bc6e63f5",
+    "name": {
+      "first": "test",
+      "last": "Stevenson"
     },
-    name: {
-      first: "Steve",
-      last: "Stevenson",
+    "location": {
+      "postcode": "m1 09s",
+      "city": "Manchester",
+      "country": "England"
     },
-    avatar_url: "https://avatars.dicebear.com/api/adventurer/erge.svg",
-    username: "Steve",
-    email: "steve@gmail.com",
-    location: {
-      postcode: "m1 09s",
-      city: "Manchester",
-      country: "England",
-    },
-    instruments: ["Harp"],
-    group: [
-      {
-        $oid: "620fc4a5ad45abc5b6ee6547",
-      },
+    "_id": "6214962c21f19fe1e7796760",
+    "avatar_url": "https://avatars.dicebear.com/api/adventurer/erge.svg",
+    "username": "testing",
+    "email": "steve@gmail.com",
+    "instruments": [
+      "Harp"
     ],
-    friends: [],
-    venues: [
-      {
-        $oid: "620fbd088a86c442a7083532",
-      },
-      {
-        $oid: "6213739ee4ff4e521a587e2b",
-      },
-    ],
-    __v: 2,
-    password: "password",
+    "hash": "bb14d0f83f2ce00da607d67adb505ec594a881173d153182a42cef2ede2315609d7974218ef8df473b88a426d2ce3d18d43fd8624a2b82154d71df1cd37cbe54",
+    "salt": "a3b36389891b123655d698d813ec8520fa73008747e2143bf1eca1762e08c169",
+    "group": [],
+    "friends": [],
+    "venues": [],
+    "__v": 0,
+    "events": []
   });
 
   const isLoggedIn = false;
@@ -61,7 +52,7 @@ function App() {
             <Route path='/venues' element={<Venues />} />
             <Route path='/venues/:_id' element={<SingleVenue />} />
             <Route path='/groups' element={<Groups />} />
-            <Route path='/groups/:_id' element={<SingleGroup />} />
+            <Route path='/events' element={<Events />} />
           </Routes>
         </div>
       </UserContext.Provider>

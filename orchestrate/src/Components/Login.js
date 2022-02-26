@@ -1,35 +1,41 @@
 import "../Styling/Login.css";
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { login } from "../Utils/api";
+import { login, getUserByUsername } from "../Utils/api";
 import { UserContext } from "../Utils/User";
 
 
 export function Login() {
 
-  const { setLoggedUser } = useContext(UserContext);
-
+  const { loggedUser, setLoggedUser } = useContext(UserContext);
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [status, setStatus] = useState('')
+  const [user, setUser] = useState({})
 
-  const handleChangeUser = (e) => {
-    console.log(e.target.value)
-    setUsernameInput(e.target.value)
+  const handleChangeUser = (event) => {
+    setUsernameInput(event.target.value)
   };
 
-  const handleChangePass = (e) => {
-    console.log(e.target.value)
-    setPasswordInput(e.target.value)
+  const handleChangePass = (event) => {
+    setPasswordInput(event.target.value)
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login(usernameInput, passwordInput).then((res) => {
-      setLoggedUser(res)
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    login(usernameInput, passwordInput).then(res => {
+      setStatus(res)
     })
-    // if verify is user then navigate to dashboard
-    // else msg : user does not exist, click Register if you don't have an account
   };
+  const Redirect = (user) => {
+    useNavigate(user._id)
+  }
+  useEffect(async () => {
+    if (status === "Success") {
+      const newUser = await getUserByUsername(usernameInput)
+      setUser(newUser)
+    }
+  }, [status])
 
 
 
@@ -48,6 +54,11 @@ export function Login() {
         </div>
         <button type="submit">Login</button>
       </form >
+      {
+        (status === "Failed")
+          ? <p>Username or password incorrect</p>
+          : null
+      }
       <p>Don't have an account?</p>
       <p><a href="/register">Register</a> now, it's quick and easy to get started!</p>
     </div >

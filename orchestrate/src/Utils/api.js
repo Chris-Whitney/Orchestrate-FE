@@ -6,11 +6,12 @@ const orchestrateApi = axios.create({
 
 export const getSingleUser = (id) => {
   if (id === undefined) {
-    console.log('no ID')}
+    console.log('no ID')
+  }
   else {
-  return orchestrateApi.get(`api/users/${id}`).then((res) => {
-    return res.data.user;
-  });
+    return orchestrateApi.get(`api/users/${id}`).then((res) => {
+      return res.data.user;
+    });
   }
 };
 
@@ -70,28 +71,32 @@ export const login = (username, password) => {
   return orchestrateApi
     .post("login", { username, password })
     .then((res) => {
-      console.log(res);
-      return res;
+      return res.data.msg;
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
+export const getUserByUsername = (name) => {
+  return orchestrateApi.get(`api/users/search?username=${name}`).then(res => {
+    console.log(res.data.users[0])
+  })
+}
+
 export const postNewUser = (user) => {
-  console.log(user);
   return orchestrateApi
     .post("api/users", {
       name: {
         first: user.firstname,
-        last: "Stevenson",
+        last: user.lastname,
       },
       location: {
         postcode: "m1 09s",
         city: "Manchester",
         country: "England",
       },
-      avatar_url: "https://avatars.dicebear.com/api/adventurer/erge.svg",
+      avatar_url: `https://avatars.dicebear.com/api/adventurer/${user.username}.svg`,
       username: user.username,
       email: "steve@gmail.com",
       instruments: ["Harp"],
@@ -107,9 +112,9 @@ export const postNewUser = (user) => {
 };
 
 export const getUserEvents = (id) => {
-    return orchestrateApi.get(`api/users/${id}/events`).then((res) => {
-      return res.data.events
-    })
+  return orchestrateApi.get(`api/users/${id}/events`).then((res) => {
+    return res.data.events
+  })
 }
 
 export const removeEvent = (id, uId) => {
