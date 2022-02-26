@@ -1,5 +1,7 @@
 import '../Styling/Welcome.css'
 import { useNavigate } from "react-router-dom";
+import background from "../Images/orchestrate.mp4"
+import logo from "../Images/logo.png"
 
 export function Welcome() {
     const navigate = useNavigate();
@@ -9,10 +11,14 @@ export function Welcome() {
     }
  
   return (
+    <>
+    <video autoPlay loop muted id='video'><source src={background} type='video/mp4'/></video>
     <div className='welcome-main'>
-      <h1>Welcome</h1>
+
+      <img src={logo} alt="orchestrate_logo" id="logo" />
       {/* logo, possiby dynamic background, onClick through to login */}
-      <img onClick={handleClick} src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1190,w_2120,x_0,y_0/f_auto,q_auto,w_1100/v1554933625/shape/mentalfloss/52912-istock-523871055.jpg"></img>
+      <button onClick={handleClick}>login</button>
     </div>
+  </>
   );
 }
