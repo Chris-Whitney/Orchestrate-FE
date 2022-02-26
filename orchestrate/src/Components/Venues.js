@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "../Styling/Venues.css";
 import { getAllVenues } from "../Utils/api";
 import { Link } from "react-router-dom";
 
@@ -8,16 +9,17 @@ export function Venues() {
 
   useEffect(async () => {
     const allVenues = await getAllVenues();
-    console.log(allVenues)
+    console.log(allVenues);
     setVenues(allVenues);
     setLoading(true);
   }, []);
 
   return (
-    <div>
+    <div className="all-venues-main">
+      <br></br>
       {loading ? (
         <div>
-          <ul>
+          <ul class="uk-list">
             {venues.map((venue) => {
               return (
                 <li key={venue.name}>

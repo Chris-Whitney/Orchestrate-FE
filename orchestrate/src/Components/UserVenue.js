@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getVenueById } from "../Utils/api";
 import { UserContext } from "../Utils/User";
 import { getUserVenues } from "../Utils/api";
+import '../Styling/UserVenue.css';
 
 export function UserVenue() {
   const { loggedUser } = useContext(UserContext);
@@ -29,31 +30,62 @@ export function UserVenue() {
   return (
     <div>
       <div>
-        <h4>venue componant</h4>
+        <h4>venue component</h4>
       </div>
-      <button type="button" onClick={handleClick}>
-        Find Venues
+      {/* uikit slider */}
+      <div data-uk-slider>
+        {loading ? (
+          <div
+            className="uk-position-relative uk-visible-toggle uk-light"
+            tabindex="-1"
+          >
+            <p>Your recent venues:</p>
+            <ul className="uk-slider-items uk-child-width-1-1@s uk-child-width-1-2@m data-uk-grid">
+              {newVenue.map((venue) => {
+                return (
+                  <li key={`v${venue._id}`}>
+                    {
+                      <Link to={`/venues/${venue._id}`}>
+                        <p>{venue.name}</p>
+                        <p>{venue.location.city}</p>
+                        <p>{venue.contact.email}</p>
+                        <img
+                          src={venue.avatar_url}
+                          style={{ height: "200px", width: "400px" }}
+                        />
+                      </Link>
+                    }
+                  </li>
+                );
+              })}
+            </ul>
+
+            <a
+              className="uk-position-center-left uk-position-small uk-hidden-hover"
+              href="#"
+              data-uk-slidenav-previous
+              data-uk-slider-item="previous"
+            ></a>
+            <a
+              className="uk-position-center-right uk-position-small uk-hidden-hover"
+              href="#"
+              data-uk-slidenav-next
+              data-uk-slider-item="next"
+            ></a>
+          </div>
+        ) : null}
+        <ul className="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+      </div>
+      <p>Looking for a venue?</p>
+      <button
+        class="uk-button uk-button-default uk-button-small"
+        type="button"
+        onClick={handleClick}
+      >
+        Search Venues
       </button>
-      {loading ? (
-        <div>
-          <ul>
-            {newVenue.map((venue) => {
-              return (
-                <li key={`v${venue._id}`}>
-                  {
-                    <Link to={`/venues/${venue._id}`}>
-                      <p>{venue.name}</p>
-                      <p>{venue.location.city}</p>
-                      <p>{venue.contact.email}</p>
-                      <img src={venue.avatar_url} />
-                    </Link>
-                  }
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : null}
+      <br></br>
+      <br></br>
     </div>
   );
 }

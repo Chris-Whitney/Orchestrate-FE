@@ -6,11 +6,11 @@ import { CreateGroup } from "./CreateGroup";
 export function Groups() {
   const [allGroups, setAllGroups] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [toggleCreateGroup, setToggleCreateGroup] = useState(false)
+  const [toggleCreateGroup, setToggleCreateGroup] = useState(false);
 
   const handleClick = () => {
-      setToggleCreateGroup(true)
-  }
+    setToggleCreateGroup(true);
+  };
 
   useEffect(() => {
     getAllGroups().then((groups) => {
@@ -25,9 +25,13 @@ export function Groups() {
       {loading ? (
         <div>
           <div>
-           <button onClick={handleClick}>
-             Create Group
-           </button>
+            <br></br>
+            <button
+              class="uk-button uk-button-default uk-button-small"
+              onClick={handleClick}
+            >
+              Create Group
+            </button>
           </div>
           {/* {toggleCreateGroup ? <CreateGroup /> : null } */}
           <ul>
@@ -54,8 +58,9 @@ export function Groups() {
             })}
           </ul>
         </div>
-      ) : <div uk-spinner></div>
-      }
+      ) : (
+        <div uk-spinner></div>
+      )}
     </div>
   );
 }

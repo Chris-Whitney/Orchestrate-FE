@@ -6,26 +6,28 @@ const orchestrateApi = axios.create({
 
 export const getSingleUser = (id) => {
   if (id === undefined) {
-    console.log('no ID')}
-  else {
-  return orchestrateApi.get(`api/users/${id}`).then((res) => {
-    return res.data.user;
-  });
+    console.log("no ID");
+  } else {
+    return orchestrateApi.get(`api/users/${id}`).then((res) => {
+      return res.data.user;
+    });
   }
 };
 
 export const setUserEvent = (dates, id, title) => {
-  return orchestrateApi.post(`api/users/${id}/events`, {
-    title,
-    from: dates.from,
-    to: dates.to
-  }).then(res => {
-    return res.data.event
-  })
-}
+  return orchestrateApi
+    .post(`api/users/${id}/events`, {
+      title,
+      from: dates.from,
+      to: dates.to,
+    })
+    .then((res) => {
+      return res.data.event;
+    });
+};
 export const getSingleGroup = (id) => {
   return orchestrateApi.get(`api/groups/${id}`).then((res) => {
-    console.log(res.data.group, '<<<res.data.group')
+    console.log(res.data.group, "<<<res.data.group");
     return res.data.group;
   });
 };
@@ -49,10 +51,10 @@ export const getAllGroups = () => {
 };
 
 export const getAllVenues = () => {
-  return orchestrateApi.get('api/venues').then((res) => {
+  return orchestrateApi.get("api/venues").then((res) => {
     return res.data.venues;
-  })
-}
+  });
+};
 
 export const getUserGroups = (id) => {
   return orchestrateApi.get(`api/users/${id.$oid}/groups`).then((res) => {
@@ -113,13 +115,13 @@ export const postNewUser = (user) => {
 };
 
 export const getUserEvents = (id) => {
-    return orchestrateApi.get(`api/users/${id}/events`).then((res) => {
-      return res.data.events
-    })
-}
+  return orchestrateApi.get(`api/users/${id}/events`).then((res) => {
+    return res.data.events;
+  });
+};
 
 export const removeEvent = (id, uId) => {
   return orchestrateApi.delete(`api/users${uId}/events/${id}`).then((res) => {
-    return true
-  })
-}
+    return true;
+  });
+};

@@ -22,11 +22,17 @@ export function UserGroups() {
 
   return (
     <div>
-      <button type='button' onClick={handleClick}>
-        Find Groups
+      <p>Orchestrate Groups are where the magic happens...</p>
+      <button
+        class="uk-button uk-button-default uk-button-small"
+        type="button"
+        onClick={handleClick}
+      >
+        Find a Group
       </button>
       {loading ? (
-        <ul>
+        <ul class="uk-list">
+          <p>Groups you belong to:</p>
           {groups.map((group) => {
             return (
               <li key={group.name}>

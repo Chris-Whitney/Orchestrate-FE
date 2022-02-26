@@ -1,5 +1,3 @@
-export function CreateGroup () {
-    return (
-        <h1>hey</h1>
-    )
+export function CreateGroup() {
+  return <h1>hey</h1>;
 }

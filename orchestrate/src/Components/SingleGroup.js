@@ -1,3 +1,4 @@
+import "../Styling/SingleGroup.css";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -24,7 +25,7 @@ export function SingleGroup() {
   }, [_id]);
 
   return (
-    <div>
+    <div className="single-group-main">
       {loading ? (
         <>
           <h1>{singleGroup.name}</h1>

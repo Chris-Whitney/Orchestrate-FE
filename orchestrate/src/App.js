@@ -10,8 +10,8 @@ import { SingleVenue } from "./Components/SingleVenue";
 import { Venues } from "./Components/Venues";
 import { Groups } from "./Components/Groups";
 import { SingleGroup } from "./Components/SingleGroup";
-import { Header } from './Components/Header';
-import { Footer } from './Components/Footer'
+import { Header } from "./Components/Header";
+import { Footer } from "./Components/Footer";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState({
@@ -54,17 +54,17 @@ function App() {
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ loggedUser, setLoggedUser, isLoggedIn }}>
-        <div className='App'>
+        <div className="App">
           <Header />
           <Routes>
-            <Route path='/' element={<Welcome />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/home' element={<Dashboard />} />
-            <Route path='/venues' element={<Venues />} />
-            <Route path='/venues/:_id' element={<SingleVenue />} />
-            <Route path='/groups' element={<Groups />} />
-            <Route path='/groups/:_id' element={<SingleGroup />} />
+            <Route path="/" element={<Welcome />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/home" element={<Dashboard />} />
+            <Route path="/venues" element={<Venues />} />
+            <Route path="/venues/:_id" element={<SingleVenue />} />
+            <Route path="/groups" element={<Groups />} />
+            <Route path="/groups/:_id" element={<SingleGroup />} />
           </Routes>
         </div>
         <Footer />
