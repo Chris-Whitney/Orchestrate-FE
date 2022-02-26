@@ -1,4 +1,5 @@
 import "./App.css";
+import backgroundImage from "./Images/background.jpg";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Welcome } from "./Components/Welcome";
@@ -52,7 +53,8 @@ function App() {
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ loggedUser, setLoggedUser, isLoggedIn }}>
-        <div className='App'>
+          {/* <img src={backgroundImage} alt="background-image" className="background-image"/> */}
+        <div style={{backgroundImage: `url({backgroundImage})`}} className='App'>
           <Routes>
             <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />
