@@ -4,8 +4,8 @@ const orchestrateApi = axios.create({
   baseURL: "https://orchestrate-co.herokuapp.com/",
 });
 
-export const getSingleUser = (id) => {
-  if (id === undefined) {
+export const getSingleUser = (id = false) => {
+  if (id === false) {
     console.log('no ID')
   }
   else {
@@ -15,32 +15,52 @@ export const getSingleUser = (id) => {
   }
 };
 
-export const setUserEvent = (dates, id, title) => {
-  return orchestrateApi.post(`api/users/${id}/events`, {
-    title,
-    from: dates.from,
-    to: dates.to
-  }).then(res => {
-    return res.data.event
-  })
+export const setUserEvent = (dates, id = false, title) => {
+  if (id === false) {
+    console.log('no ID')
+  }
+  else {
+    return orchestrateApi.post(`api/users/${id}/events`, {
+      title,
+      from: dates.from,
+      to: dates.to
+    }).then(res => {
+      return res.data.event
+    })
+  }
 }
-export const getSingleGroup = (id) => {
-  return orchestrateApi.get(`api/groups/${id}`).then((res) => {
-    console.log(res.data.group, '<<<res.data.group')
-    return res.data.group;
-  });
+export const getSingleGroup = (id = false) => {
+  if (id === false) {
+    console.log('no ID')
+  }
+  else {
+    return orchestrateApi.get(`api/groups/${id}`).then((res) => {
+      console.log(res.data.group, '<<<res.data.group')
+      return res.data.group;
+    });
+  }
 };
 
-export const getGroupOwner = (id) => {
-  return orchestrateApi.get(`api/groups/${id}/owner`).then((res) => {
-    return res.data.owner;
-  });
+export const getGroupOwner = (id = false) => {
+  if (id === false) {
+    console.log('no ID')
+  }
+  else {
+    return orchestrateApi.get(`api/groups/${id}/owner`).then((res) => {
+      return res.data.owner;
+    });
+  }
 };
 
-export const getSingleGroupMembers = (id) => {
-  return orchestrateApi.get(`api/groups/${id}/members`).then((res) => {
-    return res.data.members;
-  });
+export const getSingleGroupMembers = (id = false) => {
+  if (id === false) {
+    console.log('no ID')
+  }
+  else {
+    return orchestrateApi.get(`api/groups/${id}/members`).then((res) => {
+      return res.data.members;
+    });
+  }
 };
 
 export const getAllGroups = () => {
@@ -49,22 +69,38 @@ export const getAllGroups = () => {
   });
 };
 
-export const getUserGroups = (id) => {
-  return orchestrateApi.get(`api/users/${id.$oid}/groups`).then((res) => {
-    return res.data.groups;
-  });
+export const getUserGroups = (id = false) => {
+  if (id === false) {
+    console.log('no ID')
+  }
+  else {
+    console.log(id)
+    return orchestrateApi.get(`api/users/${id}/groups`).then((res) => {
+      return res.data.groups;
+    });
+  }
 };
 
-export const getUserVenues = (id) => {
-  return orchestrateApi.get(`api/users/${id}/venues`).then((res) => {
-    return res.data.venues;
-  });
+export const getUserVenues = (id = false) => {
+  if (id === false) {
+    console.log('no ID')
+  }
+  else {
+    return orchestrateApi.get(`api/users/${id}/venues`).then((res) => {
+      return res.data.venues;
+    });
+  }
 };
 
-export const getVenueById = (id) => {
-  return orchestrateApi.get(`api/venues/${id}`).then((res) => {
-    return res.data.venue;
-  });
+export const getVenueById = (id = false) => {
+  if (id === false) {
+    console.log('no ID')
+  }
+  else {
+    return orchestrateApi.get(`api/venues/${id}`).then((res) => {
+      return res.data.venue;
+    });
+  }
 };
 
 export const login = (username, password) => {
@@ -81,6 +117,7 @@ export const login = (username, password) => {
 export const getUserByUsername = (name) => {
   return orchestrateApi.get(`api/users/search?username=${name}`).then(res => {
     console.log(res.data.users[0])
+    return (res.data.users[0])
   })
 }
 
@@ -111,13 +148,19 @@ export const postNewUser = (user) => {
     });
 };
 
-export const getUserEvents = (id) => {
-  return orchestrateApi.get(`api/users/${id}/events`).then((res) => {
-    return res.data.events
-  })
+export const getUserEvents = (id = false) => {
+  if (id === false) {
+    console.log('no ID')
+  }
+  else {
+    return orchestrateApi.get(`api/users/${id}/events`).then((res) => {
+      return res.data.events
+    })
+  }
 }
 
-export const removeEvent = (id, uId) => {
+export const removeEvent = (id, uId = false) => {
+  if (!uId) { console.log('error no valid ID'); return }
   return orchestrateApi.delete(`api/users${uId}/events/${id}`).then((res) => {
     return true
   })

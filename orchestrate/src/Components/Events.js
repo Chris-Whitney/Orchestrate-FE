@@ -1,9 +1,8 @@
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import { Calendar } from 'react-modern-calendar-datepicker';
 import { useEffect, useState, useContext } from 'react'
-import { getSingleUser, setUserEvent, getUserEvents, removeEvent } from '../Utils/api'
-import { differenceInCalendarDays, startOfToday, startOfTomorrow } from 'date-fns';
-import { UserContext } from '../Utils/User'
+import { setUserEvent, getUserEvents, removeEvent } from '../Utils/api'
+import { UserContext } from '../Contexts/User';
 
 export function Events() {
 
@@ -19,8 +18,12 @@ export function Events() {
 
     const updateEvents = () => {
         setUserEvent(selectedDayRange, loggedUser._id, eventTitle).then(() => {
+            setSelectedDayRange({
+                from: null,
+                to: null
+            })
+            setEventTitle("")
             setRefresh(!refresh)
-
         })
     }
 
@@ -55,7 +58,7 @@ export function Events() {
                                 {title}
                                 <br />{`from ${from.day}/${from.month}/${from.year}`}<br />
                                 {`to ${to.day}/${to.month}/${to.year}`}
-                                <div><button onClick={deleteEvent(event._id)}>X</button></div>
+                                <div><button onClick={() => { deleteEvent(event._id) }}>X</button></div>
                             </div>
                         )
                     })

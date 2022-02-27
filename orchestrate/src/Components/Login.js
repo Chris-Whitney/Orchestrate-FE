@@ -2,16 +2,18 @@ import "../Styling/Login.css";
 import { useState, useContext, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import { login, getUserByUsername } from "../Utils/api";
-import { UserContext } from "../Utils/User";
+import { UserContext } from "../Contexts/User";
+
 
 
 export function Login() {
-
-  const { loggedUser, setLoggedUser } = useContext(UserContext);
+  const { loggedUser, setUser, setLoggedIn } = useContext(UserContext)
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [username, setUsername] = useState("")
   const [status, setStatus] = useState('')
-  const [user, setUser] = useState({})
+
+  const navigate = useNavigate()
 
   const handleChangeUser = (event) => {
     setUsernameInput(event.target.value)
@@ -24,18 +26,20 @@ export function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     login(usernameInput, passwordInput).then(res => {
+      setUsername(usernameInput)
       setStatus(res)
     })
   };
-  const Redirect = (user) => {
-    useNavigate(user._id)
-  }
-  useEffect(async () => {
+  useEffect(() => {
     if (status === "Success") {
-      const newUser = await getUserByUsername(usernameInput)
-      setUser(newUser)
+      getUserByUsername(username).then(res => {
+        console.log(res, "<-- user object")
+        setUser(res)
+        setLoggedIn(true)
+        navigate('/home')
+      })
     }
-  }, [status])
+  }, [navigate, status, setLoggedIn, setUser, username])
 
 
 
