@@ -1,6 +1,6 @@
 .background-image { 
     object-fit: cover;
-    width: 100vh;
+    width: 100vw;
     height: 100vh;
     position: fixed;
     z-index: -2;
@@ -10,30 +10,4 @@
 
 
 
-button {
-    background: #fafafa;
-    background-image: -webkit-linear-gradient(top, #fafafa, #c2c0c2);
-    background-image: -moz-linear-gradient(top, #fafafa, #c2c0c2);
-    background-image: -ms-linear-gradient(top, #fafafa, #c2c0c2);
-    background-image: -o-linear-gradient(top, #fafafa, #c2c0c2);
-    background-image: linear-gradient(to bottom, #fafafa, #c2c0c2);
-    -webkit-border-radius: 30;
-    -moz-border-radius: 30;
-    border-radius: 30px;
-    font-family: Arial;
-    color: #303030;
-    padding: 10px 20px 10px 20px;
-    text-decoration: none;
-    border: none;
-  }
-  
-  button:hover {
-    background: #dbd8db;
-    background-image: -webkit-linear-gradient(top, #dbd8db, #a8a8a8);
-    background-image: -moz-linear-gradient(top, #dbd8db, #a8a8a8);
-    background-image: -ms-linear-gradient(top, #dbd8db, #a8a8a8);
-    background-image: -o-linear-gradient(top, #dbd8db, #a8a8a8);
-    background-image: linear-gradient(to bottom, #dbd8db, #a8a8a8);
-    text-decoration: none;
-    border: none;
-  }
+

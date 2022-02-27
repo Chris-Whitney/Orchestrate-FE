@@ -20,9 +20,10 @@ export function Welcome() {
     <div className='welcome-main'>
 
       <img src={logo} alt="orchestrate_logo" id="logo"/>
-      {/* logo, possiby dynamic background, onClick through to login */}
-      <button onClick={handleLoginClick}>Login</button>
-      <button onClick={handleRegisterClick}>Register</button>
+      <div className="welcome-buttons uk-margin">
+      <button className=" welcome-button uk-button uk-button-default uk-margin-right" onClick={handleLoginClick}>Login</button>
+      <button className=" welcome-button uk-button uk-button-default uk-margin-left" onClick={handleRegisterClick}>Register</button>
+      </div>
     </div>
   </>
   );

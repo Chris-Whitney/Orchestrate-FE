@@ -54,7 +54,8 @@ function App() {
     <BrowserRouter>
       <UserContext.Provider value={{ loggedUser, setLoggedUser, isLoggedIn }}>
           {/* <img src={backgroundImage} alt="background-image" className="background-image"/> */}
-        <div style={{backgroundImage: `url({backgroundImage})`}} className='App'>
+        <div style={{backgroundImage: `url(${backgroundImage})`,
+  backgroundSize: "cover"}} className='background-image'>
           <Routes>
             <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />

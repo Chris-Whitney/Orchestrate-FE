@@ -55,7 +55,7 @@ export function Events() {
                             {title}
                             <br/>{`from ${from.day}/${from.month}/${from.year}`}<br/>
                             {`to ${to.day}/${to.month}/${to.year}`}
-                            <div><button onClick={deleteEvent(event._id)}>X</button></div>
+                            <div><button className="uk-button uk-button-default" onClick={deleteEvent(event._id)}>X</button></div>
                             </div>
                     )
                 })

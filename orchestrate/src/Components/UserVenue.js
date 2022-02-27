@@ -31,7 +31,7 @@ export function UserVenue() {
       <div>
         <h4>venue componant</h4>
       </div>
-      <button type='button' onClick={handleClick}>
+      <button className="uk-button uk-button-default" type='button' onClick={handleClick}>
         Find Venues
       </button>
       {loading ? (

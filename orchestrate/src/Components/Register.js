@@ -71,12 +71,7 @@ const navigate = useNavigate()
           <input type="password" placeholder="password" name='password' autoComplete='off' required />
         </label>
         <br></br>
-        <label>
-          Upload a profile picture:
-          <input type="file" placeholder="profile-img" name='profile-img' />
-        </label>
-        <br></br>
-        <button onClick={handleClick}type="submit">
+        <button className="uk-button uk-button-default" onClick={handleClick}type="submit">
           Sign-up
         </button>
       </form>

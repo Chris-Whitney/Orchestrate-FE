@@ -46,7 +46,7 @@ export function Login() {
           <span className="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
           <input onChange={handleChangePass} type="password" required></input>
         </div>
-        <button type="submit">Login</button>
+        <button className="uk-button uk-button-default" type="submit">Login</button>
       </form >
       <p>Don't have an account?</p>
       <p><a href="/register">Register</a> now, it's quick and easy to get started!</p>

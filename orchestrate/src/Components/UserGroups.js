@@ -22,7 +22,7 @@ export function UserGroups() {
 
   return (
     <div>
-      <button type='button' onClick={handleClick}>
+      <button className="uk-button uk-button-default" type='button' onClick={handleClick}>
         Find Groups
       </button>
       {loading ? (
