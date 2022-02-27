@@ -33,7 +33,6 @@ export function Login() {
   useEffect(() => {
     if (status === "Success") {
       getUserByUsername(username).then(res => {
-        console.log(res, "<-- user object")
         setUser(res)
         setLoggedIn(true)
         navigate('/home')

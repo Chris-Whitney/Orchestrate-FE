@@ -35,7 +35,6 @@ export const getSingleGroup = (id = false) => {
   }
   else {
     return orchestrateApi.get(`api/groups/${id}`).then((res) => {
-      console.log(res.data.group, '<<<res.data.group')
       return res.data.group;
     });
   }
@@ -74,7 +73,6 @@ export const getUserGroups = (id = false) => {
     console.log('no ID')
   }
   else {
-    console.log(id)
     return orchestrateApi.get(`api/users/${id}/groups`).then((res) => {
       return res.data.groups;
     });
@@ -116,7 +114,6 @@ export const login = (username, password) => {
 
 export const getUserByUsername = (name) => {
   return orchestrateApi.get(`api/users/search?username=${name}`).then(res => {
-    console.log(res.data.users[0])
     return (res.data.users[0])
   })
 }
@@ -140,7 +137,6 @@ export const postNewUser = (user) => {
       password: user.password,
     })
     .then((res) => {
-      console.log(res.data);
       return res.data;
     })
     .catch((err) => {
@@ -160,8 +156,18 @@ export const getUserEvents = (id = false) => {
 }
 
 export const removeEvent = (id, uId = false) => {
-  if (!uId) { console.log('error no valid ID'); return }
-  return orchestrateApi.delete(`api/users${uId}/events/${id}`).then((res) => {
-    return true
-  })
+  if (uId === false) {
+    console.log('no ID')
+  } else {
+    return orchestrateApi.delete(`api/users/${uId}/events/${id}`).then((res) => {
+      if (res.status === 204) {
+        console.log('deleted')
+        return true
+      }
+      else {
+        console.log('issue:', res.status)
+        return false
+      }
+    })
+  }
 }

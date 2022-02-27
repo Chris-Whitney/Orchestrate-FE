@@ -8,7 +8,6 @@ export function Groups() {
 
   useEffect(() => {
     getAllGroups().then((groups) => {
-      console.log(groups);
       setAllGroups(groups);
       setLoading(true);
     });

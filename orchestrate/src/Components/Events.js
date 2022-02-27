@@ -9,6 +9,7 @@ export function Events() {
     const [eventList, setEventList] = useState([])
     const { loggedUser } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(false)
     const [selectedDayRange, setSelectedDayRange] = useState({
         from: null,
         to: null
@@ -17,14 +18,20 @@ export function Events() {
     const [refresh, setRefresh] = useState(false)
 
     const updateEvents = () => {
-        setUserEvent(selectedDayRange, loggedUser._id, eventTitle).then(() => {
-            setSelectedDayRange({
-                from: null,
-                to: null
-            })
-            setEventTitle("")
+        if (selectedDayRange.from === null || selectedDayRange.to === null) {
+            setError(true)
             setRefresh(!refresh)
-        })
+        } else {
+            setError(false)
+            setUserEvent(selectedDayRange, loggedUser._id, eventTitle).then(() => {
+                setSelectedDayRange({
+                    from: null,
+                    to: null
+                })
+
+                setRefresh(!refresh)
+            })
+        }
     }
 
     const inputHandler = (event) => {
@@ -40,9 +47,9 @@ export function Events() {
     useEffect(() => {
         getUserEvents(loggedUser._id).then((events) => {
             setEventList(events)
-            setIsLoading(false)
+            setEventTitle('')
         })
-    }, [refresh])
+    }, [refresh, loggedUser._id])
 
     return (
         <div>
@@ -100,6 +107,7 @@ export function Events() {
                                         >
                                             Add Event
                                         </button>
+                                        {(error) ? <><br />Please Select a date range</> : null}
                                     </p></>)}
                             />
                         </div>
