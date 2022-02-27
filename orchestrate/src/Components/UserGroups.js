@@ -1,13 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../Contexts/User";
 import { getUserGroups } from "../Utils/api";
-import { UserContext } from "../Utils/User";
+
 
 export function UserGroups() {
   const [groups, setGroups] = useState([]);
   const navigate = useNavigate();
 
-  const { loggedUser } = useContext(UserContext);
+  const { loggedUser } = useContext(UserContext)
   const [loading, setLoading] = useState(false);
 
   const handleClick = () => {

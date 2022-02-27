@@ -1,42 +1,75 @@
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import { Calendar } from 'react-modern-calendar-datepicker';
 import { useEffect, useState, useContext } from 'react'
-import { setUserEvent } from '../Utils/api'
-import { differenceInCalendarDays, startOfToday, startOfTomorrow } from 'date-fns';
-import { UserContext } from '../Utils/User'
+import { setUserEvent, getUserEvents, removeEvent } from '../Utils/api'
+import { UserContext } from '../Contexts/User';
 
 export function Events() {
 
-    const [eventList, setEventList] = useState([{"to":{"day":16,"year":2022,"month":2},"from":{"day":15,"year":2022,"month":2},"_id":"6218bac3a2f71bdf9b0a8347"},{"to":{"day":16,"year":2022,"month":2},"from":{"day":15,"year":2022,"month":2},"_id":"6218bafca2f71bdf9b0a8353"},{"to":{"day":16,"year":2022,"month":2},"from":{"day":15,"year":2022,"month":2},"_id":"6218bb42a2f71bdf9b0a8368"}])
+    const [eventList, setEventList] = useState([])
     const { loggedUser } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(false)
     const [selectedDayRange, setSelectedDayRange] = useState({
         from: null,
         to: null
     });
+    const [eventTitle, setEventTitle] = useState('')
+    const [refresh, setRefresh] = useState(false)
+
     const updateEvents = () => {
-        setUserEvent(selectedDayRange, loggedUser._id.$oid).then((res) => {
-        setEventList(res)
-        setIsLoading(false)
+        if (selectedDayRange.from === null || selectedDayRange.to === null) {
+            setError(true)
+            setRefresh(!refresh)
+        } else {
+            setError(false)
+            setUserEvent(selectedDayRange, loggedUser._id, eventTitle).then(() => {
+                setSelectedDayRange({
+                    from: null,
+                    to: null
+                })
+
+                setRefresh(!refresh)
+            })
+        }
+    }
+
+    const inputHandler = (event) => {
+        setEventTitle(event.target.value)
+    }
+
+    const deleteEvent = (id) => {
+        removeEvent(id, loggedUser._id).then(() => {
+            setRefresh(!refresh)
         })
     }
 
     useEffect(() => {
-    })
+        getUserEvents(loggedUser._id).then((events) => {
+            setEventList(events)
+            setEventTitle('')
+        })
+    }, [refresh, loggedUser._id])
 
     return (
         <div>
             <h4>Event Component</h4>
             <div className="uk-flex uk-flex-center">
-                {isLoading 
-                ? eventList.map((event) => {
-                    console.log(eventList.length)
-                    const from = event.from
-                    const to = event.to
-                    return ( <div key={event._id} className="uk-card uk-card-default uk-card-body">{`from ${from.day}/${from.month}/${from.year}`}<br/>{`to ${to.day}/${to.month}/${to.year}`}</div>
-                    )
-                })
-                : <p>Loading</p>
+                {!isLoading
+                    ? eventList.map((event) => {
+                        const { title = 'rehearsal' } = event
+                        const from = event.from
+                        const to = event.to
+                        return (
+                            <div key={event._id} className="uk-card uk-card-default uk-card-body">
+                                {title}
+                                <br />{`from ${from.day}/${from.month}/${from.year}`}<br />
+                                {`to ${to.day}/${to.month}/${to.year}`}
+                                <div><button onClick={() => { deleteEvent(event._id) }}>X</button></div>
+                            </div>
+                        )
+                    })
+                    : <p>Loading</p>
                 }
             </div>
             <ul data-uk-accordion>
@@ -55,7 +88,7 @@ export function Events() {
                                 shouldHighlightWeekends
                                 //disabledDays={[{year: 0000, month: 0, day:00}]}
                                 renderFooter={() => (<>
-                                    <div><input placeholder='Enter event title'></input></div>
+                                    <div><input onChange={inputHandler} placeholder='Enter event title'></input></div>
                                     <p className='uk-margin'>
                                         <button className='uk-button uk-button-primary uk-button-small'
                                             type="button"
@@ -70,10 +103,11 @@ export function Events() {
                                         </button>
                                         <button className='uk-margin-left uk-button uk-button-primary uk-button-small'
                                             type="button"
-                                            onClick={() => {updateEvents()}}
+                                            onClick={() => { updateEvents() }}
                                         >
                                             Add Event
                                         </button>
+                                        {(error) ? <><br />Please Select a date range</> : null}
                                     </p></>)}
                             />
                         </div>
