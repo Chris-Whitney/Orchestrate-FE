@@ -53,7 +53,7 @@ export function Events() {
     return (
         <div>
             <h4>Event Component</h4>
-            <div className="uk-flex uk-flex-center">
+            {/* <div className="uk-flex uk-flex-center">
                 {!isLoading
                     ? eventList.map((event) => {
                         const { title = 'rehearsal' } = event
@@ -68,7 +68,23 @@ export function Events() {
                             </div>
                         )
                     })
-                    : <p>Loading</p>
+                    : <p>Loading</p> */}
+            <div className="uk-slider">
+                {!isLoading 
+                ? eventList.map((event) => {
+                    const { title = 'rehearsal'} = event 
+                    const from = event.from
+                    const to = event.to
+                    return (
+                            <ul key={event._id} className="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m data-uk-grid">
+                            {title}
+                            <li>{`from ${from.day}/${from.month}/${from.year}`}
+                            {`to ${to.day}/${to.month}/${to.year}`}
+                            <button className="uk-button uk-button-default" onClick={deleteEvent(event._id)}>X</button></li>
+                            </ul>
+                    )
+                })
+                : <p>Loading</p>
                 }
             </div>
             <ul data-uk-accordion>

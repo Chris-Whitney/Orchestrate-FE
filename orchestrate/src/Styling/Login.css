@@ -2,6 +2,25 @@ body {
     text-align: center;
 }
 
-.login-main {
-
+.uk-inline {
+    margin: 10px;
+    margin-bottom: 20px;
 }
+
+.login-main {
+    color: #212121;
+}
+
+.login-main > h1 {
+    color: #212121;
+}
+
+.register-link {
+    color: #212121;
+    font-weight: bold;
+}
+
+.register-link:hover {
+    color: black;
+}
+

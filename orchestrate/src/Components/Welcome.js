@@ -1,18 +1,30 @@
 import '../Styling/Welcome.css'
 import { useNavigate } from "react-router-dom";
+import background from "../Images/orchestrate.mp4"
+import logo from "../Images/logo.png"
 
 export function Welcome() {
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    const handleLoginClick = () => {
         navigate('/login')
     }
- 
+
+    const handleRegisterClick = () => {
+      navigate('/register')
+    }
+
   return (
+    <>
+    <video autoPlay loop muted id='video'><source src={background} type='video/mp4'/></video>
     <div className='welcome-main'>
-      <h1>Welcome</h1>
-      {/* logo, possiby dynamic background, onClick through to login */}
-      <img onClick={handleClick} src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1190,w_2120,x_0,y_0/f_auto,q_auto,w_1100/v1554933625/shape/mentalfloss/52912-istock-523871055.jpg"></img>
+
+      <img src={logo} alt="orchestrate_logo" id="logo"/>
+      <div className="welcome-buttons uk-margin">
+      <button className=" welcome-button uk-button uk-button-default uk-margin-right" onClick={handleLoginClick}>Login</button>
+      <button className=" welcome-button uk-button uk-button-default uk-margin-left" onClick={handleRegisterClick}>Register</button>
+      </div>
     </div>
+  </>
   );
 }

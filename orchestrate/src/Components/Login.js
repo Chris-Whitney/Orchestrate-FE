@@ -43,17 +43,31 @@ export function Login() {
 
 
   return (
-    <div className="login-main">
+   <div className="login-main">
+      <br></br>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <p>Please enter your username and password</p>
+        <p>Already a member? Please enter your username and password</p>
         <div className="uk-inline">
-          <span className="uk-form-icon" uk-icon="icon: user"></span>
-          <input onChange={handleChangeUser} type="text" required></input>
+          <span className="uk-form-icon" data-uk-icon="icon: user"></span>
+          <input
+            className="uk-input"
+            onChange={handleChangeUser}
+            type="text"
+            required
+          ></input>
         </div>
         <div className="uk-inline">
-          <span className="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-          <input onChange={handleChangePass} type="password" required></input>
+          <span
+            className="uk-form-icon uk-form-icon-flip"
+            data-uk-icon="icon: lock"
+          ></span>
+          <input
+            className="uk-input"
+            onChange={handleChangePass}
+            type="password"
+            required
+          ></input>
         </div>
         <button type="submit">Login</button>
       </form >
@@ -63,7 +77,10 @@ export function Login() {
           : null
       }
       <p>Don't have an account?</p>
-      <p><a href="/register">Register</a> now, it's quick and easy to get started!</p>
-    </div >
+      <p>
+        <a class='register-link' href="/register">Register</a> now, it's quick and easy to get
+        started!
+      </p>
+    </div>
   );
 }
