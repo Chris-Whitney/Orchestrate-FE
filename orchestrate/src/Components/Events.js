@@ -44,19 +44,19 @@ export function Events() {
     return (
         <div>
             <h4>Event Component</h4>
-            <div className="uk-flex uk-flex-center">
+            <div className="uk-slider">
                 {!isLoading 
                 ? eventList.map((event) => {
                     const { title = 'rehearsal'} = event 
                     const from = event.from
                     const to = event.to
                     return (
-                            <div key={event._id} className="uk-card uk-card-default uk-card-body">
+                            <ul key={event._id} className="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m data-uk-grid">
                             {title}
-                            <br/>{`from ${from.day}/${from.month}/${from.year}`}<br/>
+                            <li>{`from ${from.day}/${from.month}/${from.year}`}
                             {`to ${to.day}/${to.month}/${to.year}`}
-                            <div><button className="uk-button uk-button-default" onClick={deleteEvent(event._id)}>X</button></div>
-                            </div>
+                            <button className="uk-button uk-button-default" onClick={deleteEvent(event._id)}>X</button></li>
+                            </ul>
                     )
                 })
                 : <p>Loading</p>

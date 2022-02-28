@@ -6,7 +6,7 @@ import { UserGroups } from './UserGroups';
 export function Dashboard() {
 
     return (
-        <div>
+        <div className="dashboard-component">
             <h1>Dashboard</h1>
             <UserGroups />
             <Events />
