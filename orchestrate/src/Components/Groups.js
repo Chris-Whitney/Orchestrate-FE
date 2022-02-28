@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllGroups } from "../Utils/api";
 import { Header } from "./Header";
+import CreateGroup from "./CreateGroup";
 
 export function Groups() {
   const [allGroups, setAllGroups] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [toggleCreateGroup, setToggleCreateGroup] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = () => {};
+  const toggleGroup = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     getAllGroups().then((groups) => {
@@ -22,39 +25,12 @@ export function Groups() {
     <>
       <Header />
       <div>
+        <div>
+          <input type='button' value='Add Group' onClick={toggleGroup} />
+          {isOpen && <CreateGroup handleClose={toggleGroup} />}
+        </div>
         {loading ? (
           <div>
-            <div>
-              <ul data-uk-accordion>
-                <li>
-                  <button className='uk-accordion-title'>Create Group</button>
-                  <div className='uk-accordion-content'>
-                    <form>
-                      <h1>hello</h1>
-                      <div>
-                        <label htmlFor=''>Name of the Group : </label>
-                        <input type='text' />
-                      </div>
-
-                      <div>
-                        <label htmlFor=''>Your avatar: </label>
-                        <input type='text' />
-                      </div>
-                      <div>
-                        <label htmlFor=''>Main Contact :</label>
-                        <input type='text' />
-                      </div>
-                      <div>
-                        <label htmlFor=''>Email :</label>
-                        <input type='email' />
-                      </div>
-                      <button>create</button>
-                    </form>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
             <ul>
               {allGroups.map((group) => {
                 return (
