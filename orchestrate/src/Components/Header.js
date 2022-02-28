@@ -14,7 +14,7 @@ export function Header() {
         </Link>
         <div className='messages'>
           <Link to='/messages'>
-            <button className='nav-link'>messages</button>
+            <button className='nav-link'>Messages</button>
           </Link>
         </div>
         <div className='status'>
