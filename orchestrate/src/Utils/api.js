@@ -11,6 +11,8 @@ export const getSingleUser = (id = false) => {
   else {
     return orchestrateApi.get(`api/users/${id}`).then((res) => {
       return res.data.user;
+    }).catch((err) => {
+      console.log(err);
     });
   }
 };
@@ -26,7 +28,9 @@ export const setUserEvent = (dates, id = false, title) => {
       to: dates.to
     }).then(res => {
       return res.data.event
-    })
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 }
 export const getSingleGroup = (id = false) => {
@@ -36,6 +40,8 @@ export const getSingleGroup = (id = false) => {
   else {
     return orchestrateApi.get(`api/groups/${id}`).then((res) => {
       return res.data.group;
+    }).catch((err) => {
+      console.log(err);
     });
   }
 };
@@ -47,6 +53,8 @@ export const getGroupOwner = (id = false) => {
   else {
     return orchestrateApi.get(`api/groups/${id}/owner`).then((res) => {
       return res.data.owner;
+    }).catch((err) => {
+      console.log(err);
     });
   }
 };
@@ -58,6 +66,8 @@ export const getSingleGroupMembers = (id = false) => {
   else {
     return orchestrateApi.get(`api/groups/${id}/members`).then((res) => {
       return res.data.members;
+    }).catch((err) => {
+      console.log(err);
     });
   }
 };
@@ -65,6 +75,8 @@ export const getSingleGroupMembers = (id = false) => {
 export const getAllGroups = () => {
   return orchestrateApi.get("api/groups").then((res) => {
     return res.data.groups;
+  }).catch((err) => {
+    console.log(err);
   });
 };
 
@@ -75,6 +87,8 @@ export const getUserGroups = (id = false) => {
   else {
     return orchestrateApi.get(`api/users/${id}/groups`).then((res) => {
       return res.data.groups;
+    }).catch((err) => {
+      console.log(err);
     });
   }
 };
@@ -86,6 +100,8 @@ export const getUserVenues = (id = false) => {
   else {
     return orchestrateApi.get(`api/users/${id}/venues`).then((res) => {
       return res.data.venues;
+    }).catch((err) => {
+      console.log(err);
     });
   }
 };
@@ -97,6 +113,8 @@ export const getVenueById = (id = false) => {
   else {
     return orchestrateApi.get(`api/venues/${id}`).then((res) => {
       return res.data.venue;
+    }).catch((err) => {
+      console.log(err);
     });
   }
 };

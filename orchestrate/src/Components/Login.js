@@ -7,7 +7,7 @@ import { UserContext } from "../Contexts/User";
 
 
 export function Login() {
-  const { loggedUser, setUser, setLoggedIn } = useContext(UserContext)
+  const { setUser, isLoggedIn, setLoggedIn } = useContext(UserContext)
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [username, setUsername] = useState("")

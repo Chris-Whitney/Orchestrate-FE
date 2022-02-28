@@ -28,7 +28,6 @@ export function Events() {
                     from: null,
                     to: null
                 })
-
                 setRefresh(!refresh)
             })
         }
@@ -47,7 +46,7 @@ export function Events() {
     useEffect(() => {
         getUserEvents(loggedUser._id).then((events) => {
             setEventList(events)
-            setEventTitle('')
+            setIsLoading(false)
         })
     }, [refresh, loggedUser._id])
 
