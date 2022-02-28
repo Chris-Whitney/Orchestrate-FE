@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getVenueById } from "../Utils/api";
-import { UserContext } from "../Utils/User";
+import { UserContext } from "../Contexts/User";
 import { getUserVenues } from "../Utils/api";
+
 
 export function UserVenue() {
   const { loggedUser } = useContext(UserContext);
@@ -16,7 +16,7 @@ export function UserVenue() {
   };
 
   useEffect(() => {
-    getUserVenues(loggedUser._id.$oid)
+    getUserVenues(loggedUser._id)
       .then((res) => {
         setNewVenue(res);
         setLoading(true);
