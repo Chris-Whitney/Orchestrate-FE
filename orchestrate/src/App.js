@@ -13,6 +13,7 @@ import { Account } from "./Components/Account";
 import { Footer } from "./Components/Footer";
 import { Events } from "./Components/Events";
 import { Messages } from "./Components/Messages";
+import { SingleGroup } from "./Components/SingleGroup";
 
 function App() {
   const [loggedUser, setUser] = useState({});
@@ -30,6 +31,7 @@ function App() {
             <Route path='/venues' element={<Venues />} />
             <Route path='/venues/:_id' element={<SingleVenue />} />
             <Route path='/groups' element={<Groups />} />
+            <Route path='/groups/:_id' element={<SingleGroup />} />
             <Route path='/events' element={<Events />} />
             <Route path='/messages' element={<Messages />} />
             <Route path='/account' element={<Account />} />

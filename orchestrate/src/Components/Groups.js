@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllGroups, getSingleUser } from "../Utils/api";
-import { CreateGroup } from "./CreateGroup";
+import { getAllGroups } from "../Utils/api";
 import { Header } from "./Header";
 
 export function Groups() {
   const [allGroups, setAllGroups] = useState([]);
   const [loading, setLoading] = useState(false);
   const [toggleCreateGroup, setToggleCreateGroup] = useState(false);
+  const navigate = useNavigate();
 
-  const handleClick = () => {
-    setToggleCreateGroup(true);
-  };
+  const handleClick = () => {};
 
   useEffect(() => {
     getAllGroups().then((groups) => {
@@ -27,9 +25,36 @@ export function Groups() {
         {loading ? (
           <div>
             <div>
-              <button onClick={handleClick}>Create Group</button>
+              <ul data-uk-accordion>
+                <li>
+                  <button className='uk-accordion-title'>Create Group</button>
+                  <div className='uk-accordion-content'>
+                    <form>
+                      <h1>hello</h1>
+                      <div>
+                        <label htmlFor=''>Name of the Group : </label>
+                        <input type='text' />
+                      </div>
+
+                      <div>
+                        <label htmlFor=''>Your avatar: </label>
+                        <input type='text' />
+                      </div>
+                      <div>
+                        <label htmlFor=''>Main Contact :</label>
+                        <input type='text' />
+                      </div>
+                      <div>
+                        <label htmlFor=''>Email :</label>
+                        <input type='email' />
+                      </div>
+                      <button>create</button>
+                    </form>
+                  </div>
+                </li>
+              </ul>
             </div>
-            {/* {toggleCreateGroup ? <CreateGroup /> : null } */}
+
             <ul>
               {allGroups.map((group) => {
                 return (
