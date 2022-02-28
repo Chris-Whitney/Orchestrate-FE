@@ -12,6 +12,11 @@ export function Header() {
         <Link to='/profile'>
           <button className='nav-link'>Profile</button>
         </Link>
+        <div className='messages'>
+          <Link to='/messages'>
+            <button className='nav-link'>messages</button>
+          </Link>
+        </div>
         <div className='status'>
           <Link to='/login'>
             <button className='nav-link'>Log out</button>

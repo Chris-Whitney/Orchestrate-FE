@@ -96,7 +96,9 @@ export const getAllGroups = () => {
 export const getAllVenues = () => {
   return orchestrateApi.get("api/venues").then((res) => {
     return res.data.venues;
-  });
+  }).catch((err) => {
+    console.log(err);
+  })
 };
 
 export const getUserGroups = (id = false) => {
@@ -158,6 +160,8 @@ export const login = (username, password) => {
 export const getUserByUsername = (name) => {
   return orchestrateApi.get(`api/users/search?username=${name}`).then((res) => {
     return res.data.users[0];
+  }).catch((err) => {
+    console.log(err);
   });
 };
 
@@ -193,6 +197,8 @@ export const getUserEvents = (id = false) => {
   } else {
     return orchestrateApi.get(`api/users/${id}/events`).then((res) => {
       return res.data.events;
+    }).catch((err) => {
+      console.log(err);
     });
   }
 };
@@ -211,6 +217,8 @@ export const removeEvent = (id, uId = false) => {
           console.log("issue:", res.status);
           return false;
         }
+      }).catch((err) => {
+        console.log(err);
       });
   }
 };
