@@ -10,11 +10,11 @@ import { SingleVenue } from "./Components/SingleVenue";
 import { Venues } from "./Components/Venues";
 import { Groups } from "./Components/Groups";
 import { Events } from "./Components/Events";
+import { Messages } from "./Components/Messages";
 
 function App() {
   const [loggedUser, setUser] = useState({})
   const [isLoggedIn, setLoggedIn] = useState(false);
-
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ loggedUser, setUser, isLoggedIn, setLoggedIn }}>
@@ -28,6 +28,7 @@ function App() {
             <Route path='/venues/:_id' element={<SingleVenue />} />
             <Route path='/groups' element={<Groups />} />
             <Route path='/events' element={<Events />} />
+            <Route path='/messages' element={<Messages />} />
           </Routes>
         </div>
       </UserContext.Provider>
