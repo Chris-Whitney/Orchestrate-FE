@@ -2,13 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Contexts/User";
 import { getUserGroups } from "../Utils/api";
-
+import { Header } from "./Header";
 
 export function UserGroups() {
   const [groups, setGroups] = useState([]);
   const navigate = useNavigate();
 
-  const { loggedUser } = useContext(UserContext)
+  const { loggedUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
@@ -22,21 +22,23 @@ export function UserGroups() {
   }, [loggedUser._id]);
 
   return (
-    <div>
-      <button type='button' onClick={handleClick}>
-        Find Groups
-      </button>
-      {loading ? (
-        <ul>
-          {groups.map((group) => {
-            return (
-              <li key={group.name}>
-                <h2>{group.name}</h2>
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
-    </div>
+    <>
+      <div>
+        <button type='button' onClick={handleClick}>
+          Find Groups
+        </button>
+        {loading ? (
+          <ul>
+            {groups.map((group) => {
+              return (
+                <li key={group.name}>
+                  <h2>{group.name}</h2>
+                </li>
+              );
+            })}
+          </ul>
+        ) : null}
+      </div>
+    </>
   );
 }

@@ -9,8 +9,8 @@ export function Header() {
         <Link to='/home'>
           <button className='nav-link'>Home</button>
         </Link>
-        <Link to='/profile'>
-          <button className='nav-link'>Profile</button>
+        <Link to='/account'>
+          <button className='nav-link'>Account</button>
         </Link>
         <div className='messages'>
           <Link to='/messages'>

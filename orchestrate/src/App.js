@@ -9,7 +9,7 @@ import { UserContext } from "./Contexts/User";
 import { SingleVenue } from "./Components/SingleVenue";
 import { Venues } from "./Components/Venues";
 import { Groups } from "./Components/Groups";
-import { Header } from "./Components/Header";
+import { Account } from "./Components/Account";
 import { Footer } from "./Components/Footer";
 import { Events } from "./Components/Events";
 import { Messages } from "./Components/Messages";
@@ -22,7 +22,6 @@ function App() {
       <UserContext.Provider
         value={{ loggedUser, setUser, isLoggedIn, setLoggedIn }}>
         <div className='App'>
-          <Header />
           <Routes>
             <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />
@@ -33,6 +32,7 @@ function App() {
             <Route path='/groups' element={<Groups />} />
             <Route path='/events' element={<Events />} />
             <Route path='/messages' element={<Messages />} />
+            <Route path='/account' element={<Account />} />
           </Routes>
         </div>
         <Footer />
