@@ -21,7 +21,7 @@ function App() {
       first: "Steve",
       last: "Stevenson",
     },
-    avatar_url: "https://avatars.dicebear.com/api/adventurer/erge.svg",
+    avatar_url: "https://avatars.dicebear.com/api/initials/erge.svg",
     username: "Steve",
     email: "steve@gmail.com",
     location: {
@@ -55,7 +55,7 @@ function App() {
       <UserContext.Provider value={{ loggedUser, setLoggedUser, isLoggedIn }}>
           {/* <img src={backgroundImage} alt="background-image" className="background-image"/> */}
         <div style={{backgroundImage: `url(${backgroundImage})`,
-  backgroundSize: "cover"}} className='background-image'>
+  backgroundSize: "cover"}} className='background-image' >
           <Routes>
             <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />
