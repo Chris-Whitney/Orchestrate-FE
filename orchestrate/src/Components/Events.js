@@ -43,25 +43,52 @@ export function Events() {
 
     return (
         <div>
+
             <h4>Event Component</h4>
-            <div className="uk-slider">
+            <div className="data-uk-position-relative data-uk-visible-toggle data-uk-light" tabindex="-1" data-uk-slider>
                 {!isLoading 
-                ? eventList.map((event) => {
+                ? 
+                    <ul className="data-uk-slider-items data-uk-child-width-1-2 data-uk-child-width-1-3@m uk-grid">
+                        {eventList.map((event) => {
                     const { title = 'rehearsal'} = event 
                     const from = event.from
                     const to = event.to
                     return (
-                            <ul key={event._id} className="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m data-uk-grid">
-                            {title}
-                            <li>{`from ${from.day}/${from.month}/${from.year}`}
+                        <>
+                        {title}
+                            <li key={event._id} >
+                            <div className="data-uk-panel">{`from ${from.day}/${from.month}/${from.year}`}
                             {`to ${to.day}/${to.month}/${to.year}`}
-                            <button className="uk-button uk-button-default" onClick={deleteEvent(event._id)}>X</button></li>
-                            </ul>
+                            <button className="data-uk-button data-uk-button-default" onClick={deleteEvent(event._id)}>X</button>
+                            </div>
+                            </li>
+                            
+                            <a
+                            className="uk-position-center-left uk-position-small uk-hidden-hover"
+                            href="#"
+                            data-uk-slidenav-previous
+                            data-uk-slider-item="previous"
+                        ></a>
+                        <a
+                            className="uk-position-center-right uk-position-small uk-hidden-hover"
+                            href="#"
+                            data-uk-slidenav-next
+                            data-uk-slider-item="next"
+                        ></a>
+                        </>
                     )
-                })
+                })}
+                </ul>
                 : <p>Loading</p>
-                }
+            }
             </div>
+            
+
+
+
+
+
+
             <ul data-uk-accordion>
                 <li>
                     <button className="uk-button uk-button-default uk-accordion-title ">
