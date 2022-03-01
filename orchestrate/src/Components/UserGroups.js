@@ -22,23 +22,21 @@ export function UserGroups() {
   }, [loggedUser._id]);
 
   return (
-    <>
-      <div>
-        <button type='button' onClick={handleClick}>
-          Find Groups
-        </button>
-        {loading ? (
-          <ul>
-            {groups.map((group) => {
-              return (
-                <li key={group.name}>
-                  <h2>{group.name}</h2>
-                </li>
-              );
-            })}
-          </ul>
-        ) : null}
-      </div>
-    </>
+    <div>
+      <button className="uk-button uk-button-default" type='button' onClick={handleClick}>
+        Find Groups
+      </button>
+      {loading ? (
+        <ul>
+          {groups.map((group) => {
+            return (
+              <li key={group.name}>
+                <h2>{group.name}</h2>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+    </div>
   );
 }

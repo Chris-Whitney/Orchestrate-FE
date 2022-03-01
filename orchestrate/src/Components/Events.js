@@ -53,23 +53,35 @@ export function Events() {
     return (
         <div>
             <h4>Event Component</h4>
-            <div className="uk-flex uk-flex-center">
-                {!isLoading
-                    ? eventList.map((event) => {
-                        const { title = 'rehearsal' } = event
-                        const from = event.from
-                        const to = event.to
-                        return (
-                            <div key={event._id} className="uk-card uk-card-default uk-card-body">
-                                {title}
-                                <br />{`from ${from.day}/${from.month}/${from.year}`}<br />
-                                {`to ${to.day}/${to.month}/${to.year}`}
-                                <div><button onClick={() => { deleteEvent(event._id) }}>X</button></div>
-                            </div>
-                        )
-                    })
-                    : <p>Loading</p>
-                }
+            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" data-uk-slider>
+                <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-flex uk-flex-center">
+                    {!isLoading
+                        ? eventList.map((event) => {
+                            const { title = 'rehearsal' } = event
+                            const from = event.from
+                            const to = event.to
+                            return (
+                                <div class="uk-panel">
+                                    <div key={event._id} className="uk-card uk-card-default uk-card-body">
+                                        <div class="uk-position-center">
+                                            {title}
+                                            <br />{`from ${from.day}/${from.month}/${from.year}`}<br />
+                                            {`to ${to.day}/${to.month}/${to.year}`}
+                                        </div>
+                                        <div>
+                                            <button onClick={() => { deleteEvent(event._id) }}>X</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                        : <p>Loading</p>
+                    }
+                </ul>
+
+                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+
             </div>
             <ul data-uk-accordion>
                 <li>

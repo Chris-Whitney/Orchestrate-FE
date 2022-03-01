@@ -1,4 +1,5 @@
 import "./App.css";
+import backgroundImage from "./Images/background.jpg";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Welcome } from "./Components/Welcome";
@@ -18,11 +19,19 @@ import { SingleGroup } from "./Components/SingleGroup";
 function App() {
   const [loggedUser, setUser] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(false);
+
+
+
+
   return (
     <BrowserRouter>
       <UserContext.Provider
         value={{ loggedUser, setUser, isLoggedIn, setLoggedIn }}>
-        <div className='App'>
+        {/* <img src={backgroundImage} alt="background-image" className="background-image"/> */}
+        <div style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover"
+        }} className='background-image' >
           <Routes>
             <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />
@@ -37,7 +46,6 @@ function App() {
             <Route path='/account' element={<Account />} />
           </Routes>
         </div>
-        <Footer />
       </UserContext.Provider>
     </BrowserRouter>
   );
