@@ -1,5 +1,8 @@
+import grouplogo from "../Images/group.jpeg";
+import "../Styling/SingleGroup.css";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Header } from '../Components/Header';
 import {
   getGroupOwner,
   getSingleGroup,
@@ -48,48 +51,50 @@ export function SingleGroup() {
 
   return (
     <div>
+      <Header />
       {loading ? (
         <>
           <h1>{singleGroup.name}</h1>
           <img
-            src={singleGroup.avatar_url}
+            className="single-group-img"
+            src={grouplogo}
             alt={`${singleGroup.name} picture`}
-            style={{ height: "200px", width: "400px" }}
           />
           <p>
             Created by : {owner.name.first} {owner.name.last}
           </p>
           <ul>
             {members.length === 1 ? (
-              <p>member</p>
+              <p>Current group member:</p>
             ) : members.length === 0 ? (
               <p>No members</p>
             ) : (
-              <p>members</p>
+              <p>Current group members</p>
             )}
             {members.map((member) => {
               return (
-                <li>
+                <li key={member._id}>
                   <img
-                    style={{ height: "200px", width: "400px" }}
+                  className="group-user-avatar"
                     src={member.avatar_url}
                   />
                   <br />
-                  {member.name.first} {member.name.last}
+                  <p>
+                    {member.name.first} {member.name.last}
+                  </p>
                 </li>
               );
             })}
           </ul>
           <ul>
-            {instruments.length === 1 ? (
-              <p>Instrument</p>
-            ) : instruments.length === 0 ? (
-              <p>No instruments</p>
-            ) : (
-              <p>Instruments</p>
-            )}
+            <p>Instruments:</p>
+
             {instruments.map((instrument) => {
-              return <li>{instrument}</li>;
+              return (
+                <li>
+                  <p>{instrument}</p>
+                </li>
+              );
             })}
           </ul>
         </>
