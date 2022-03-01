@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const orchestrateApi = axios.create({
-  baseURL: "http://localhost:9090",
+  baseURL: "http://orchestrate-co.herokuapp.com/",
 });
 
 export const getSingleUser = (id = false) => {
@@ -94,11 +94,14 @@ export const getAllGroups = () => {
 };
 
 export const getAllVenues = () => {
-  return orchestrateApi.get("api/venues").then((res) => {
-    return res.data.venues;
-  }).catch((err) => {
-    console.log(err);
-  })
+  return orchestrateApi
+    .get("api/venues")
+    .then((res) => {
+      return res.data.venues;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export const getUserGroups = (id = false) => {
@@ -158,11 +161,14 @@ export const login = (username, password) => {
 };
 
 export const getUserByUsername = (name) => {
-  return orchestrateApi.get(`api/users/search?username=${name}`).then((res) => {
-    return res.data.users[0];
-  }).catch((err) => {
-    console.log(err);
-  });
+  return orchestrateApi
+    .get(`api/users/search?username=${name}`)
+    .then((res) => {
+      return res.data.users[0];
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export const postNewUser = (user) => {
@@ -195,11 +201,14 @@ export const getUserEvents = (id = false) => {
   if (id === false) {
     console.log("no ID");
   } else {
-    return orchestrateApi.get(`api/users/${id}/events`).then((res) => {
-      return res.data.events;
-    }).catch((err) => {
-      console.log(err);
-    });
+    return orchestrateApi
+      .get(`api/users/${id}/events`)
+      .then((res) => {
+        return res.data.events;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 };
 
@@ -217,8 +226,21 @@ export const removeEvent = (id, uId = false) => {
           console.log("issue:", res.status);
           return false;
         }
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.log(err);
       });
   }
+};
+
+export const postGroup = (group) => {
+  return orchestrateApi.post(`api/groups`, group).then((res) => {
+    return res.data.group;
+  });
+};
+
+export const postVenue = (venue) => {
+  return orchestrateApi.post(`api/venues`, venue).then((res) => {
+    return res.data.venue;
+  });
 };
