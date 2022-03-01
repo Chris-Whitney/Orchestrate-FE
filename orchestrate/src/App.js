@@ -19,16 +19,18 @@ function App() {
   const [loggedUser, setUser] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(false);
 
-    
+
 
 
   return (
     <BrowserRouter>
       <UserContext.Provider
         value={{ loggedUser, setUser, isLoggedIn, setLoggedIn }}>
-          {/* <img src={backgroundImage} alt="background-image" className="background-image"/> */}
-        <div style={{backgroundImage: `url(${backgroundImage})`,
-  backgroundSize: "cover"}} className='background-image' >
+        {/* <img src={backgroundImage} alt="background-image" className="background-image"/> */}
+        <div style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover"
+        }} className='background-image' >
           <Routes>
             <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />
@@ -42,7 +44,6 @@ function App() {
             <Route path='/account' element={<Account />} />
           </Routes>
         </div>
-        <Footer />
       </UserContext.Provider>
     </BrowserRouter>
   );

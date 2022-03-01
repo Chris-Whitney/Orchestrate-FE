@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const orchestrateApi = axios.create({
-  baseURL: "https://orchestrate-co.herokuapp.com/",
+  baseURL: "http://localhost:9090",
 });
 
 export const getSingleUser = (id = false) => {
