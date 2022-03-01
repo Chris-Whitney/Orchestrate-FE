@@ -1,0 +1,16 @@
+.add-button {
+    display: flex;
+}
+
+.add-venue-button {
+	width: 20%;
+	background-color: rgba(255, 215, 0, 0.4);
+	border: 1px solid #f2f2f2cc;
+	color: rgba(255, 255, 255, 0.9);
+	padding: 5px 0;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 5px;
+	cursor: pointer;
+	justify-content: center;
+}

@@ -1,0 +1,22 @@
+.group-component {
+    color: aliceblue;
+}
+
+.single-group-img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+p {
+    color: black;
+}
+
+ul {
+    list-style: none;
+}
+
+.group-user-avatar {
+    height: 170px;
+    width: 170px;
+}

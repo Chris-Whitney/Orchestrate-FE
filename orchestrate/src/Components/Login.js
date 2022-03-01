@@ -1,78 +1,84 @@
 import "../Styling/Login.css";
-import { useState, useContext } from 'react'
+import "../Styling/animate.css"
+import { useState, useContext, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { login } from "../Utils/api";
-import { UserContext } from "../Utils/User";
+import { login, getUserByUsername } from "../Utils/api";
+import { UserContext } from "../Contexts/User";
+import { Header } from "./Header";
+
 
 
 export function Login() {
-
-  const { setLoggedUser } = useContext(UserContext);
-
+  const { setUser, isLoggedIn, setLoggedIn } = useContext(UserContext)
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [username, setUsername] = useState("")
+  const [status, setStatus] = useState('')
+  const [errorClass, setErrorClass] = useState('')
 
-  const handleChangeUser = (e) => {
-    console.log(e.target.value)
-    setUsernameInput(e.target.value)
+  const navigate = useNavigate()
+
+  const handleChangeUser = (event) => {
+    setUsernameInput(event.target.value)
   };
 
-  const handleChangePass = (e) => {
-    console.log(e.target.value)
-    setPasswordInput(e.target.value)
+  const handleChangePass = (event) => {
+    setPasswordInput(event.target.value)
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login(usernameInput, passwordInput).then((res) => {
-      setLoggedUser(res)
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErrorClass("")
+    login(usernameInput, passwordInput).then(res => {
+      setUsername(usernameInput)
+      setStatus(res)
     })
-    // if verify is user then navigate to dashboard
-    // else msg : user does not exist, click Register if you don't have an account
   };
+  useEffect(() => {
+    if (status === "Success") {
+      getUserByUsername(username).then(res => {
+        setUser(res)
+        setLoggedIn(true)
+        navigate('/home')
+      })
+    } else if (status === "Failed") {
+      setErrorClass("animated shake")
+    }
+  }, [navigate, status, setLoggedIn, setUser, username])
 
 
 
   return (
-   <div className="login-main">
-      <br></br>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <p>Already a member? Please enter your username and password</p>
-        <div className="uk-inline">
-          <span className="uk-form-icon" data-uk-icon="icon: user"></span>
-          <input
-            className="uk-input"
-            onChange={handleChangeUser}
-            type="text"
-            required
-          ></input>
-        </div>
-        <div className="uk-inline">
-          <span
-            className="uk-form-icon uk-form-icon-flip"
-            data-uk-icon="icon: lock"
-          ></span>
-          <input
-            className="uk-input"
-            onChange={handleChangePass}
-            type="password"
-            required
-          ></input>
-        </div>
-        <br/>
-        <button
-          class="uk-button uk-button-default uk-button-small"
-          type="submit"
-        >
-          Log in
-        </button>
-      </form>
-      <p>Don't have an account?</p>
-      <p>
-        <a class='register-link' href="/register">Register</a> now, it's quick and easy to get
-        started!
-      </p>
-    </div>
+    <>
+      <Header />
+      <div className="login-main">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="login-instruction-text">
+            <p>Please enter your username and password</p>
+          </div>
+          <div className="uk-inline">
+            <span className="uk-form-icon" uk-icon="icon: user"></span>
+            <input onChange={handleChangeUser} type="text" required></input>
+          </div>
+          <div className="uk-inline">
+            <span className="uk-form-icon" uk-icon="icon: lock"></span>
+            <input onChange={handleChangePass} type="password" required></input>
+          </div>
+          <div className="button-cont">
+            <button className={errorClass} type="submit">Login</button>
+          </div>
+          {
+            (status === "Failed")
+              ? <p className="error">Username or password incorrect</p>
+              : null
+          }
+          <div><p>Don't have an account?</p>
+            <p><a href="/register">Register</a> now, it's quick and easy to get started!</p></div>
+        </form >
+
+
+      </div >
+    </>
   );
 }

@@ -2,15 +2,30 @@ import "../Styling/Dashboard.css"
 import { Events } from './Events'
 import { UserVenue } from "./UserVenue";
 import { UserGroups } from './UserGroups';
+import { Header } from './Header'
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../Contexts/User";
 
 export function Dashboard() {
 
-    return (
-        <div className="dashboard-component">
-            <h1>Dashboard</h1>
-            <UserGroups />
-            <Events />
-            <UserVenue />
-        </div>
-    );
+    const { loggedUser, isLoggedIn } = useContext(UserContext)
+    console.log(loggedUser, '<<logged')
+    const navigate = useNavigate()
+    if (!isLoggedIn) {
+        return (<><h1>Your session has timed out</h1><br /><p>Please <Link to="/login">Login</Link></p></>)
+    } else {
+        return (
+            <>
+            <Header />
+            <div className="dashboard-component">
+                
+                <h1>Welcome to Orchestrate, {loggedUser.name.first}!</h1>
+                <UserGroups />
+                <Events />
+                <UserVenue />
+            </div>
+            </>
+        );
+    }
 }

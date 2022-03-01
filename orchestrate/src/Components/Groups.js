@@ -1,53 +1,78 @@
+import grouplogo from "../Images/group.jpeg";
+import "../Styling/Groups.css";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getAllGroups, getSingleUser } from "../Utils/api";
+import { Link, useNavigate } from "react-router-dom";
+import { getAllGroups } from "../Utils/api";
+import { Header } from "./Header";
+import CreateGroup from "./CreateGroup";
 
 export function Groups() {
   const [allGroups, setAllGroups] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleGroup = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     getAllGroups().then((groups) => {
-      console.log(groups);
       setAllGroups(groups);
       setLoading(true);
     });
   }, []);
 
-  // useEffect(() => {
-  //   getSingleUser();
-  // });
-
   return (
-    <div>
-      {loading ? (
+    <>
+      <Header />
+      <div className="groups-main">
         <div>
-          <ul>
-            {allGroups.map((group) => {
-              return (
-                <li key={`g${group._id}`}>
-                  <Link to={`/groups/${group._id}`}>
-                    <p>{group.name}</p>
-                    <img
-                      src={group.avatar_url}
-                      style={{ height: "200px", width: "400px" }}
-                    />
-
-                    <p>Group Contact: {group.contact.name}</p>
-
-                    {group.members.length === 1 ? (
-                      <p>member: {group.members.length} </p>
-                    ) : (
-                      <p>members: {group.members.length} </p>
-                    )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <input className="add-group-button" type="button" value="Add Group" onClick={toggleGroup} />
+          {isOpen && <CreateGroup handleClose={toggleGroup} />}
         </div>
-      ) : <div uk-spinner></div>
-      }
-    </div>
+        {loading ? (
+          <div className="display-groups">
+            <ul>
+              {allGroups.map((group) => {
+                return (
+                  <div className="group-card">
+                    <li key={`g${group._id}`}>
+                      <Link to={`/groups/${group._id}`}>
+                        <div id="group-name">
+                          <p>{group.name}</p>
+                        </div>
+                        <div className="logo-contact">
+                          <div id="group-img">
+                            <img className="group-logo"
+                              src={grouplogo}
+                            />
+                          </div>
+                          <div className="right-side">
+                            <div id="group-contact">
+                              <p>Group Contact: {group.contact.name}</p>
+                            </div>
+
+                            <div className="members">
+                              {group.members.length === 1 ? (
+                                <p>member: {group.members.length} </p>
+                              ) : (
+                                <p>members: {group.members.length} </p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </li>
+                  </div>
+                );
+              })}
+            </ul>
+          </div>
+        ) : (
+          <div data-uk-spinner></div>
+        )}
+      </div>
+    </>
   );
 }
