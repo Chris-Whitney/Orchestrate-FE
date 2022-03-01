@@ -12,6 +12,26 @@ export function SingleGroup() {
   const [loading, setLoading] = useState(false);
   const [owner, setOwner] = useState({});
   const [members, setMembers] = useState([]);
+  const [instruments, setInstruments] = useState([]);
+
+  const instrumentsInventory = () => {
+    const instruments = {};
+    members.map((member) => {
+      member.instruments.map((instrument) => {
+        instruments[instrument]
+          ? (instruments[instrument] += 1)
+          : (instruments[instrument] = 1);
+      });
+    });
+
+    owner.instruments.map((instrument) => {
+      instruments[instrument]
+        ? (instruments[instrument] += 1)
+        : (instruments[instrument] = 1);
+    });
+    const instrumentsList = Object.keys(instruments);
+    setInstruments(instrumentsList);
+  };
 
   useEffect(async () => {
     const group = await getSingleGroup(_id);
@@ -21,7 +41,10 @@ export function SingleGroup() {
     const groupMembs = await getSingleGroupMembers(_id);
     setMembers(groupMembs);
     setLoading(true);
+    instrumentsInventory();
   }, [_id]);
+
+  // useEffect(() => {}, []);
 
   return (
     <div>
@@ -55,6 +78,18 @@ export function SingleGroup() {
                   {member.name.first} {member.name.last}
                 </li>
               );
+            })}
+          </ul>
+          <ul>
+            {instruments.length === 1 ? (
+              <p>Instrument</p>
+            ) : instruments.length === 0 ? (
+              <p>No instruments</p>
+            ) : (
+              <p>Instruments</p>
+            )}
+            {instruments.map((instrument) => {
+              return <li>{instrument}</li>;
             })}
           </ul>
         </>
