@@ -105,16 +105,6 @@ export function Groups() {
             </div>
           </li>
         </ul>
-        <div>
-          {/* <input type='button' value='Add Group' onClick={toggleGroup} />
-          {isOpen && (
-            <CreateGroup
-              handleClose={toggleGroup}
-              setAllGroups={setAllGroups}
-              setIsOpen={setIsOpen}
-            />
-          )} */}
-        </div>
         {loading ? (
           <div>
             <ul>

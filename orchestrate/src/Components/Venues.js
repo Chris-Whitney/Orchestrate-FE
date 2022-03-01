@@ -11,6 +11,7 @@ export function Venues() {
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [added, setAdded] = useState(false);
   const [newVenue, setNewVenue] = useState({
     name: "",
     avatar_url: "https://avatars.dicebear.com/api/adventurer/bridgewater.svg",
@@ -49,6 +50,7 @@ export function Venues() {
           email: loggedUser.email,
         },
       });
+      setAdded(true);
     });
   };
 
@@ -95,7 +97,7 @@ export function Venues() {
     console.log(allVenues);
     setVenues(allVenues);
     setLoading(true);
-  }, [refresh]);
+  }, [refresh, added]);
 
   return (
     <>
@@ -106,60 +108,68 @@ export function Venues() {
             Add Venue
           </a>
           <div className='uk-accordion-content'>
-            <form onSubmit={handleSubmit}>
-              <h1>New Venue</h1>
+            {added === false ? (
+              <>
+                <form onSubmit={handleSubmit}>
+                  <h1>New Venue</h1>
+                  <div>
+                    <label>Venue Name : </label>
+                    <input
+                      type='text'
+                      onChange={nameHandler}
+                      // value={newVenue.name}
+                    />
+                  </div>
+                  <div>
+                    <div>
+                      <label>Street : </label>
+                      <input
+                        type='text'
+                        onChange={streetHandler}
+                        // value={newVenue.location.street}
+                      />
+                    </div>
+                    <div>
+                      <label>Number : </label>
+                      <input
+                        type='text'
+                        onChange={numberHandler}
+                        // value={newVenue.location.number}
+                      />
+                    </div>
+                    <div>
+                      <label>Postcode : </label>
+                      <input
+                        type='text'
+                        onChange={postcodeHandler}
+                        // value={newVenue.location.postcode}
+                      />
+                    </div>
+                    <div>
+                      <label>City : </label>
+                      <input
+                        type='text'
+                        onChange={cityHandler}
+                        // value={newVenue.location.city}
+                      />
+                    </div>
+                    <div>
+                      <label>Country : </label>
+                      <input
+                        type='text'
+                        onChange={countryHandler}
+                        // value={newVenue.location.country}
+                      />
+                    </div>
+                  </div>
+                  <button>create</button>
+                </form>
+              </>
+            ) : (
               <div>
-                <label>Venue Name : </label>
-                <input
-                  type='text'
-                  onChange={nameHandler}
-                  value={newVenue.name}
-                />
+                <h3>Venue Added!!!</h3>
               </div>
-              <div>
-                <div>
-                  <label>Street : </label>
-                  <input
-                    type='text'
-                    onChange={streetHandler}
-                    value={newVenue.location.street}
-                  />
-                </div>
-                <div>
-                  <label>Number : </label>
-                  <input
-                    type='text'
-                    onChange={numberHandler}
-                    value={newVenue.location.number}
-                  />
-                </div>
-                <div>
-                  <label>Postcode : </label>
-                  <input
-                    type='text'
-                    onChange={postcodeHandler}
-                    value={newVenue.location.postcode}
-                  />
-                </div>
-                <div>
-                  <label>City : </label>
-                  <input
-                    type='text'
-                    onChange={cityHandler}
-                    value={newVenue.location.city}
-                  />
-                </div>
-                <div>
-                  <label>Country : </label>
-                  <input
-                    type='text'
-                    onChange={countryHandler}
-                    value={newVenue.location.country}
-                  />
-                </div>
-              </div>
-              <button>create</button>
-            </form>
+            )}
           </div>
         </li>
       </ul>
@@ -180,6 +190,11 @@ export function Venues() {
                         "border-radius": "50%",
                       }}
                     />
+                    <br />
+                    {venue.contact.name ===
+                    `${loggedUser.name.first} ${loggedUser.name.last}` ? (
+                      <button>Delete Venue</button>
+                    ) : null}
                     <p>Location: {venue.location.city}</p>
                   </Link>
                 </li>
