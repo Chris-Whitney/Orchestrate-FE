@@ -140,12 +140,12 @@ export function Groups() {
                         <div className="logo-contact">
                           <div id="group-img">
                             <img className="group-logo"
-                              src={grouplogo}
+                              src={group.avatar_url}
                             />
                           </div>
                           <div className="right-side">
                             <div id="group-contact">
-                              <p>Group Contact: {group.contact.name}</p>
+                              <p>Group Lead: {group.contact.name}</p>
                             </div>
 
                             <div className="members">

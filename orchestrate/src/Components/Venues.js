@@ -195,7 +195,7 @@ export function Venues() {
                   <Link to={`/venues/${venue._id}`} className='link'>
                     <h1>{venue.name}</h1>
                       <img className="venue-image"
-                        src={`https://avatars.dicebear.com/api/initials/${venue.name}.svg`}
+                        src={venue.avatar_url}
                         alt={venue.name}
                       />
                     <div className='uk-flex uk-flex-around'>
