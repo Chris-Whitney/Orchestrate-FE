@@ -81,26 +81,42 @@ export function Groups() {
       <div>
         <ul data-uk-accordion>
           <li className='uk-close'>
-            <button className="uk-accordion-title add-group-button button-li">Add Group</button>
+            <button className='uk-accordion-title add-group-button button-li'>
+              Add Group
+            </button>
             <div className='uk-accordion-content'>
               <form onSubmit={submitHandler}>
                 <h1>New Group</h1>
                 <div>
-                  <input type='text' placeholder="Group Name" onChange={nameHandler} />
+                  <input
+                    type='text'
+                    placeholder='Group Name'
+                    onChange={nameHandler}
+                  />
                 </div>
                 <div>
-                  <input type='text' placeholder="Main Contact" onChange={contactHandler} />
+                  <input
+                    type='text'
+                    placeholder='Main Contact'
+                    onChange={contactHandler}
+                  />
                 </div>
                 <div>
-                  <input type='email' placeholder="Email"onChange={emailHandler} />
+                  <input
+                    type='email'
+                    placeholder='Email'
+                    onChange={emailHandler}
+                  />
                 </div>
-                <button className="create-group-button" type='submit'>create</button>
+                <button className='create-group-button' type='submit'>
+                  create
+                </button>
               </form>
             </div>
           </li>
         </ul>
         {loading ? (
-          <div className="display-groups">
+          <div className='display-groups'>
             <ul>
               {allGroups.map((group) => {
                 return (
@@ -131,24 +147,25 @@ export function Groups() {
                   //     )}
                   //   </Link>
                   // </li>
-                  <div className="group-card">
+                  <div className='group-card'>
                     <li key={`g${group._id}`}>
-                      <Link to={`/groups/${group._id}`}>
-                        <div id="group-name">
+                      <Link to={`/groups/${group._id}`} className='singlecard'>
+                        <div id='group-name'>
                           <p>{group.name}</p>
                         </div>
-                        <div className="logo-contact">
-                          <div id="group-img">
-                            <img className="group-logo"
+                        <div className='logo-contact'>
+                          <div id='group-img'>
+                            <img
+                              className='group-logo'
                               src={group.avatar_url}
                             />
                           </div>
-                          <div className="right-side">
-                            <div id="group-contact">
+                          <div className='right-side'>
+                            <div id='group-contact'>
                               <p>Group Lead: {group.contact.name}</p>
                             </div>
 
-                            <div className="members">
+                            <div className='members'>
                               {group.members.length === 1 ? (
                                 <p>member: {group.members.length} </p>
                               ) : (

@@ -34,6 +34,9 @@ p {
 
 .group-logo {
     border-radius: 50%;
+    height: 75px;
+    width: 75px;
+    object-fit: cover;
 }
 
 .logo-contact {
@@ -91,3 +94,6 @@ p {
 	cursor: pointer;
 }
 
+.singlecard:active{
+ text-decoration: none;
+}

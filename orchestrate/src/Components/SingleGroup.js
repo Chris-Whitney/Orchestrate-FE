@@ -2,7 +2,7 @@ import grouplogo from "../Images/group.jpeg";
 import "../Styling/SingleGroup.css";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Header } from '../Components/Header';
+import { Header } from "../Components/Header";
 import {
   getGroupOwner,
   getSingleGroup,
@@ -52,55 +52,53 @@ export function SingleGroup() {
   return (
     <div>
       <Header />
-      {loading ? (
-        <>
-          <h1>{singleGroup.name}</h1>
-          <img
-            className="single-group-img"
-            src={grouplogo}
-            alt={`${singleGroup.name} picture`}
-          />
-          <p>
-            Created by : {owner.name.first} {owner.name.last}
-          </p>
-          <ul>
-            {members.length === 1 ? (
-              <p>Current group member:</p>
-            ) : members.length === 0 ? (
-              <p>No members</p>
-            ) : (
-              <p>Current group members</p>
-            )}
-            {members.map((member) => {
-              return (
-                <li key={member._id}>
-                  <img
-                  className="group-user-avatar"
-                    src={member.avatar_url}
-                  />
-                  <br />
-                  <p>
-                    {member.name.first} {member.name.last}
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
-          <ul>
-            <p>Instruments:</p>
+      <div className='singleGroup-contain'>
+        {loading ? (
+          <>
+            <h1>{singleGroup.name}</h1>
+            <img
+              className='single-group-img'
+              src={singleGroup.avatar_url}
+              alt={`${singleGroup.name} picture`}
+            />
+            <p>
+              Group Leader : {owner.name.first} {owner.name.last}
+            </p>
+            <button>
+              Join <span data-uk-icon='icon: plus-circle'></span>
+            </button>
 
-            {instruments.map((instrument) => {
-              return (
-                <li>
-                  <p>{instrument}</p>
-                </li>
-              );
-            })}
-          </ul>
-        </>
-      ) : (
-        <p>....Loading</p>
-      )}
+            <ul>
+              {members.length === 1 ? (
+                <p>Current group member:</p>
+              ) : members.length === 0 ? (
+                <p>No members</p>
+              ) : (
+                <h3>Current Group Members</h3>
+              )}
+              {members.map((member) => {
+                return (
+                  <li key={member._id}>
+                    <img
+                      className='group-user-avatar'
+                      src={member.avatar_url}
+                    />
+                    <br />
+                    <p>
+                      {member.name.first} {member.name.last}
+                      <br />
+                      Instruments: {member.instruments[0]}
+                    </p>
+                    <hr />
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        ) : (
+          <p>....Loading</p>
+        )}
+      </div>
     </div>
   );
 }
