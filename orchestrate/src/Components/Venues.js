@@ -5,7 +5,6 @@ import { Header } from "./Header";
 import { UserContext } from "../Contexts/User";
 import "../Styling/Venues.css";
 
-
 export function Venues() {
   const { loggedUser } = useContext(UserContext);
   const [venues, setVenues] = useState([]);
@@ -111,10 +110,10 @@ export function Venues() {
     <>
       <Header />
       <ul data-uk-accordion>
-        <li className='uk-close'>
+        <li className='uk-close button-li'>
           <input
             type='button'
-            className='uk-accordion-title'
+            className='uk-accordion-title add-venue-button button-li'
             value='Add Venue'
           />
 
@@ -124,56 +123,56 @@ export function Venues() {
               <form onSubmit={handleSubmit} className='uk-form-horizontal'>
                 <h1>New Venue</h1>
                 <div>
-                  <label>Venue Name : </label>
                   <input
                     type='text'
+                    placeholder="Venue Name"
                     onChange={nameHandler}
                     value={newVenue.name}
                   />
                 </div>
                 <div>
                   <div>
-                    <label>Street : </label>
                     <input
-                      type='text'
-                      onChange={streetHandler}
-                      value={newVenue.location.street}
-                    />
-                  </div>
-                  <div>
-                    <label>Number : </label>
-                    <input
+                      placeholder="House number"
                       type='text'
                       onChange={numberHandler}
                       value={newVenue.location.number}
                     />
                   </div>
                   <div>
-                    <label>Postcode : </label>
                     <input
+                    placeholder="Street"
+                      type='text'
+                      onChange={streetHandler}
+                      value={newVenue.location.street}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      placeholder="Postcode"
                       type='text'
                       onChange={postcodeHandler}
                       value={newVenue.location.postcode}
                     />
                   </div>
                   <div>
-                    <label>City : </label>
                     <input
+                      placeholder="City"
                       type='text'
                       onChange={cityHandler}
                       value={newVenue.location.city}
                     />
                   </div>
                   <div>
-                    <label>Country : </label>
                     <input
+                      placeholder="Country"
                       type='text'
                       onChange={countryHandler}
                       value={newVenue.location.country}
                     />
                   </div>
                 </div>
-                <button>create</button>
+                <button className="create-venue-button">create</button>
               </form>
             </>
             )
@@ -191,28 +190,25 @@ export function Venues() {
           <ul>
             {venues.map((venue) => {
               return (
+                <>
                 <li key={venue.name} className='group-card'>
                   <Link to={`/venues/${venue._id}`} className='link'>
                     <h1>{venue.name}</h1>
-                    <div className='uk-flex uk-flex-around'>
-                      <img
+                      <img className="venue-image"
                         src={`https://avatars.dicebear.com/api/initials/${venue.name}.svg`}
-                        style={{
-                          height: "50px",
-                          width: "50px",
-                          "border-radius": "50%",
-                        }}
                         alt={venue.name}
                       />
+                    <div className='uk-flex uk-flex-around'>
                       <p>Location: {venue.location.city}</p>
                     </div>
                     <br />
                     {venue.contact.name ===
                     `${loggedUser.name.first} ${loggedUser.name.last}` ? (
-                      <button>Delete Venue</button>
+                      <button className="manage-venue-button">Manage Venue</button>
                     ) : null}
                   </Link>
                 </li>
+                </>
               );
             })}
           </ul>

@@ -81,27 +81,20 @@ export function Groups() {
       <div>
         <ul data-uk-accordion>
           <li className='uk-close'>
-            <input
-              type='button'
-              className='uk-accordion-title'
-              value='Add Group'
-            />
+            <button className="uk-accordion-title add-group-button button-li">Add Group</button>
             <div className='uk-accordion-content'>
               <form onSubmit={submitHandler}>
                 <h1>New Group</h1>
                 <div>
-                  <label>Group Name : </label>
-                  <input type='text' onChange={nameHandler} />
+                  <input type='text' placeholder="Group Name" onChange={nameHandler} />
                 </div>
                 <div>
-                  <label>Main Contact :</label>
-                  <input type='text' onChange={contactHandler} />
+                  <input type='text' placeholder="Main Contact" onChange={contactHandler} />
                 </div>
                 <div>
-                  <label>Email :</label>
-                  <input type='email' onChange={emailHandler} />
+                  <input type='email' placeholder="Email"onChange={emailHandler} />
                 </div>
-                <button type='submit'>create</button>
+                <button className="create-group-button" type='submit'>create</button>
               </form>
             </div>
           </li>

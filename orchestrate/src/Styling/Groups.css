@@ -41,14 +41,6 @@ p {
   width: 100%;
 }
 
-
-
-#group-contact {
-}
-
-.members {
-}
-
 .right-side {
   display: flex;
   flex-direction: column;
@@ -57,8 +49,7 @@ p {
 }
 
 .add-group-button {
-    margin: 20px 0px;
-
+  margin: 20px 0px;
 	width: 50%;
 	background-color: rgba(255, 215, 0, 0.4);
 	border: 1px solid #f2f2f2cc;
@@ -69,3 +60,34 @@ p {
 	border-radius: 5px;
 	cursor: pointer;
 }
+
+.button-li {
+  margin: 0 auto;
+}
+
+.uk-accordion-content input {
+  color: grey;
+	text-align: center;
+	height: 50px;
+	width: 60%;
+	border-radius: 8px;
+	background-color: rgba(253, 253, 253, 0.8);
+	border: 1px solid rgba(242, 242, 242, 0.8);
+	margin-top: 8px;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.create-group-button {
+  margin: 20px 0px;
+	width: 50%;
+	background-color: rgba(255, 215, 0, 0.4);
+	border: 1px solid #f2f2f2cc;
+	color: rgba(255, 255, 255, 0.9);
+	padding: 10px 0;
+	font-size: 18px;
+	font-weight: 600;
+	border-radius: 5px;
+	cursor: pointer;
+}
+

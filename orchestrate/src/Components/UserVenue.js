@@ -30,9 +30,6 @@ export function UserVenue() {
 
   return (
     <div>
-      <div>
-        <h4>Venues</h4>
-      </div>
       {/* uikit slider */}
       <div data-uk-slider>
         {loading ? (
@@ -62,19 +59,20 @@ export function UserVenue() {
             </ul> */}
 
             {/* hard coded for demo video */}
-            <ul className="data-uk-slider-items uk-child-width-1-1@s uk-child-width-1-2@m data-uk-grid"></ul>
-            <li className="event-card">
+            <ul className="uk-slider-items uk-child-width-1-1@s uk-child-width-1-2@m uk-grid">
+            <li className="venue-card">
             <p>The Bridgewater Hall</p>
             <img src={bridgewater} alt="bridgewater_hall_image" />
             <p>Lower Mosley Street, Manchester</p>
             <p>Contact: 0161 907 9000</p>
               </li>
-              <li className="event-card">
+              <li className="venue-card">
             <p>Stoller Hall</p>
             <img src={stoller} alt="stoller_hall_image" />
             <p>Hunts Bank, Manchester</p>
             <p>Contact: 0333 130 0967</p>
               </li>
+              </ul>
             <a
               className="uk-position-center-left uk-position-small uk-hidden-hover"
               href="#"
@@ -89,7 +87,6 @@ export function UserVenue() {
             ></a>
           </div>
         ) : null}
-        <ul className="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
       </div>
       <p>Looking for a venue?</p>
       <div className="button-container-search-venues">

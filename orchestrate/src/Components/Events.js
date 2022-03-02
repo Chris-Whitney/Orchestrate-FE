@@ -125,14 +125,14 @@ export function Events() {
                 renderFooter={() => (
                   <>
                     <div>
-                      <input
+                      <input className="event-input"
                         onChange={inputHandler}
                         placeholder="Enter event title"
                       ></input>
                     </div>
                     <p className="uk-margin">
                       <button
-                        className="uk-button uk-button-primary uk-button-small"
+                        className="uk-button uk-button-default uk-button-small"
                         type="button"
                         onClick={() => {
                           setSelectedDayRange({
@@ -143,9 +143,8 @@ export function Events() {
                       >
                         Reset Value!
                       </button>
-                      <div className="add-event-button">
                       <button
-                        className="uk-margin-left uk-button uk-button-primary uk-button-small"
+                        className="uk-margin-left uk-button uk-button-default uk-button-small"
                         type="button"
                         onClick={() => {
                           updateEvents();
@@ -153,7 +152,7 @@ export function Events() {
                       >
                         Add Event
                       </button>
-                      </div>
+                     
                       {error ? (
                         <>
                           <br />
