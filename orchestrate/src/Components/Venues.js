@@ -5,6 +5,7 @@ import { Header } from "./Header";
 import { UserContext } from "../Contexts/User";
 import "../Styling/Venues.css";
 
+
 export function Venues() {
   const { loggedUser } = useContext(UserContext);
   const [venues, setVenues] = useState([]);
@@ -197,8 +198,8 @@ export function Venues() {
                       <img
                         src={`https://avatars.dicebear.com/api/initials/${venue.name}.svg`}
                         style={{
-                          height: "200px",
-                          width: "200px",
+                          height: "50px",
+                          width: "50px",
                           "border-radius": "50%",
                         }}
                         alt={venue.name}

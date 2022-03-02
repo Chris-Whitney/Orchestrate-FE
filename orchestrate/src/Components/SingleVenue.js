@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getVenueById } from "../Utils/api";
+import { Header } from "../Components/Header"
 
 export function SingleVenue() {
   const { _id } = useParams();
@@ -18,6 +19,7 @@ export function SingleVenue() {
 
   return (
     <div>
+      <Header/>
       {loading ? (
         <div>
           <h1>{singleVenue.name}</h1>
