@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAllGroups } from "../Utils/api";
 import { Header } from "./Header";
 import { UserContext } from "../Contexts/User";
@@ -30,11 +30,19 @@ export function Groups() {
     event.preventDefault();
     postGroup(groupInfo).then((res) => {
       setAllGroups((currGroups) => {
-        const newGroups = [res, ...currGroups];
-        return newGroups;
+        return [res[0], ...currGroups];
       });
 
       setRefresh(!refresh);
+      setGroupInfo({
+        owner: loggedUser._id,
+        contact: {
+          name: "",
+          email: "",
+        },
+        name: "",
+        avatar_url: "",
+      });
     });
   };
 
@@ -43,12 +51,6 @@ export function Groups() {
     const updatedGroup = { ...groupInfo };
     updatedGroup.name = newName;
     updatedGroup.avatar_url = `https://avatars.dicebear.com/api/initials/${newName}.svg`;
-    setGroupInfo(updatedGroup);
-  };
-
-  const imageHandler = (event) => {
-    const newImage = event.target.value;
-    const updatedGroup = { ...groupInfo };
     setGroupInfo(updatedGroup);
   };
 
@@ -77,20 +79,17 @@ export function Groups() {
       <div>
         <ul data-uk-accordion>
           <li className='uk-close'>
-            <a className='uk-accordion-title' href='#'>
-              Add Group
-            </a>
+            <input
+              type='button'
+              className='uk-accordion-title'
+              value='Add Group'
+            />
             <div className='uk-accordion-content'>
               <form onSubmit={submitHandler}>
                 <h1>New Group</h1>
                 <div>
                   <label>Group Name : </label>
                   <input type='text' onChange={nameHandler} />
-                </div>
-
-                <div>
-                  <label>Group Image: </label>
-                  <input type='text' onChange={imageHandler} />
                 </div>
                 <div>
                   <label>Main Contact :</label>
@@ -119,6 +118,7 @@ export function Groups() {
                           width: "100px",
                           borderRadius: "50%",
                         }}
+                        alt={group.name}
                       />
 
                       {loggedUser._id === group.owner ? (
