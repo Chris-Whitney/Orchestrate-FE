@@ -1,16 +1,30 @@
+.venue-container {
+    overflow: auto;
+    height: 85vh;
+    margin: 20px 0px;
+    
+}
 .venue-info {
     color: black;
+}
+
+.venue-info article {
+    width: 80%;
+    margin: 20px auto;
+    text-align: justify;
+   
 }
 
 .venue-details {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    
 }
 .venue-contain {
     height: 200px;
     width: 50%;
-    text-align: left;
+    text-align: center;
     margin-top: 15px;
     padding-right: 15px;
 }
