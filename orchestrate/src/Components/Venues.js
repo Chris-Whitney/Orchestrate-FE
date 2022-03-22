@@ -53,8 +53,6 @@ export function Venues() {
         },
       });
     });
-
-    //setAdded(true);
   };
 
   const nameHandler = (event) => {
@@ -104,7 +102,6 @@ export function Venues() {
 
     setLoading(true);
   }, [refresh]);
-  // added
 
   return (
     <>
@@ -113,74 +110,73 @@ export function Venues() {
         <li className='uk-close button-li'>
           <input
             type='button'
-            className='uk-accordion-title add-venue-button button-li'
+            className='uk-accordion-title create-venue-button button-li'
             value='Add Venue'
           />
 
           <div className='uk-accordion-content'>
-            {/* {added === false ? ( */}
             <>
               <form onSubmit={handleSubmit} className='uk-form-horizontal'>
                 <h1>New Venue</h1>
                 <div>
                   <input
                     type='text'
-                    placeholder="Venue Name"
+                    placeholder='Venue Name'
                     onChange={nameHandler}
                     value={newVenue.name}
+                    required
                   />
                 </div>
                 <div>
                   <div>
                     <input
-                      placeholder="House number"
+                      placeholder='House number'
                       type='text'
                       onChange={numberHandler}
                       value={newVenue.location.number}
+                      required
                     />
                   </div>
                   <div>
                     <input
-                    placeholder="Street"
+                      placeholder='Street'
                       type='text'
                       onChange={streetHandler}
                       value={newVenue.location.street}
+                      required
                     />
                   </div>
                   <div>
                     <input
-                      placeholder="Postcode"
+                      placeholder='Postcode'
                       type='text'
                       onChange={postcodeHandler}
                       value={newVenue.location.postcode}
+                      required
                     />
                   </div>
                   <div>
                     <input
-                      placeholder="City"
+                      placeholder='City'
                       type='text'
                       onChange={cityHandler}
                       value={newVenue.location.city}
+                      required
                     />
                   </div>
                   <div>
                     <input
-                      placeholder="Country"
+                      placeholder='Country'
                       type='text'
                       onChange={countryHandler}
                       value={newVenue.location.country}
+                      required
                     />
                   </div>
                 </div>
-                <button className="create-venue-button">create</button>
+                <button className='create-venue-button'>Create</button>
               </form>
             </>
-            )
-            {/* : (
-              <div>
-                <h3>Venue Added!!!</h3>
-              </div>
-            )} */}
           </div>
         </li>
       </ul>
@@ -191,23 +187,26 @@ export function Venues() {
             {venues.map((venue) => {
               return (
                 <>
-                <li key={venue.name} className='group-card'>
-                  <Link to={`/venues/${venue._id}`} className='link'>
-                    <h1>{venue.name}</h1>
-                      <img className="venue-image"
+                  <li key={venue.name} className='group-card'>
+                    <Link to={`/venues/${venue._id}`} className='link'>
+                      <h1>{venue.name}</h1>
+                      <img
+                        className='venue-image'
                         src={venue.avatar_url}
                         alt={venue.name}
                       />
-                    <div className='uk-flex uk-flex-around'>
-                      <p>Location: {venue.location.city}</p>
-                    </div>
-                    <br />
-                    {venue.contact.name ===
-                    `${loggedUser.name.first} ${loggedUser.name.last}` ? (
-                      <button className="manage-venue-button">Manage Venue</button>
-                    ) : null}
-                  </Link>
-                </li>
+                      <div className='uk-flex uk-flex-around'>
+                        <p>Location: {venue.location.city}</p>
+                      </div>
+                      <br />
+                      {venue.contact.name ===
+                      `${loggedUser.name.first} ${loggedUser.name.last}` ? (
+                        <button className='manage-venue-button'>
+                          Manage Venue
+                        </button>
+                      ) : null}
+                    </Link>
+                  </li>
                 </>
               );
             })}
