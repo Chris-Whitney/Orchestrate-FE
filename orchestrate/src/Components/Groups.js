@@ -21,12 +21,6 @@ export function Groups() {
     name: "",
     avatar_url: "",
   });
-  // const [isOpen, setIsOpen] = useState(false);
-  // const navigate = useNavigate();
-
-  // const toggleGroup = () => {
-  //   setIsOpen(!isOpen);
-  // };
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -92,6 +86,7 @@ export function Groups() {
                     type='text'
                     placeholder='Group Name'
                     onChange={nameHandler}
+                    required
                   />
                 </div>
                 <div>
@@ -99,6 +94,7 @@ export function Groups() {
                     type='text'
                     placeholder='Main Contact'
                     onChange={contactHandler}
+                    required
                   />
                 </div>
                 <div>
@@ -106,10 +102,11 @@ export function Groups() {
                     type='email'
                     placeholder='Email'
                     onChange={emailHandler}
+                    required
                   />
                 </div>
-                <button className='create-group-button' type='submit'>
-                  create
+                <button className='add-group-button' type='submit'>
+                  Create
                 </button>
               </form>
             </div>
@@ -120,33 +117,6 @@ export function Groups() {
             <ul>
               {allGroups.map((group) => {
                 return (
-                  // <li key={`g${group._id}`}>
-                  //   <Link to={`/groups/${group._id}`}>
-                  //     <p>{group.name}</p>
-                  //     <img
-                  //       src={`https://avatars.dicebear.com/api/initials/${group.name}.svg`}
-                  //       style={{
-                  //         width: "100px",
-                  //         borderRadius: "50%",
-                  //       }}
-                  //       alt={group.name}
-                  //     />
-
-                  //     {loggedUser._id === group.owner ? (
-                  //       <>
-                  //         <br />
-                  //         <button>Delete Group</button>
-                  //       </>
-                  //     ) : null}
-                  //     <p>Group Contact: {group.contact.name}</p>
-
-                  //     {group.members.length === 1 ? (
-                  //       <p>member: {group.members.length} </p>
-                  //     ) : (
-                  //       <p>members: {group.members.length} </p>
-                  //     )}
-                  //   </Link>
-                  // </li>
                   <div className='group-card'>
                     <li key={`g${group._id}`}>
                       <Link to={`/groups/${group._id}`} className='singlecard'>
@@ -158,6 +128,7 @@ export function Groups() {
                             <img
                               className='group-logo'
                               src={group.avatar_url}
+                              alt={group.name}
                             />
                           </div>
                           <div className='right-side'>
