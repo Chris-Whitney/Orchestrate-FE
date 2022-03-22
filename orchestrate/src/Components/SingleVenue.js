@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getVenueById } from "../Utils/api";
 import { Header } from "../Components/Header";
+import Map from "./Map";
 import "../Styling/SingleVenue.css";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar } from "react-modern-calendar-datepicker";
@@ -83,29 +84,33 @@ export function SingleVenue() {
               </div>
             </li>
           </ul>
-          <h1>{singleVenue.name}</h1>
-          <div className='venue-info'>
-            <img src={singleVenue.map} />
-            <div className='venue-details'>
-              <div className='venue-contain'>
-                <ul>
-                  <p>Contact:</p>
-                  <li>{singleVenue.contact.name}</li>
-                  <li>{singleVenue.contact.number}</li>
-                  <li>{singleVenue.contact.email}</li>
-                </ul>
-              </div>
-              <div className='venue-contain'>
-                <ul>
-                  <p>Location:</p>
-                  <li>
-                    {singleVenue.location.number} {singleVenue.location.street}
-                  </li>
+          <div className='venue-container'>
+            <h1>{singleVenue.name}</h1>
+            <div className='venue-info'>
+              <Map />
+              <article>{singleVenue.description}</article>
+              <div className='venue-details'>
+                <div className='venue-contain'>
+                  <ul>
+                    <p>Contact:</p>
+                    <li>{singleVenue.contact.name}</li>
+                    <li>{singleVenue.contact.number}</li>
+                    <li>{singleVenue.contact.email}</li>
+                  </ul>
+                </div>
+                <div className='venue-contain'>
+                  <ul>
+                    <p>Location:</p>
+                    <li>
+                      {singleVenue.location.number}{" "}
+                      {singleVenue.location.street}
+                    </li>
 
-                  <li>{singleVenue.location.postcode}</li>
-                  <li>{singleVenue.location.city}</li>
-                  <li>{singleVenue.location.country}</li>
-                </ul>
+                    <li>{singleVenue.location.postcode}</li>
+                    <li>{singleVenue.location.city}</li>
+                    <li>{singleVenue.location.country}</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
