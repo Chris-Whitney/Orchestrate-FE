@@ -23,10 +23,6 @@ For development, you will only need Node.js installed on your environement.
 
 Open your browser and visit <http://localhost:3000>
 
-## Simple build for production
-
-    $ npm run build
-
 ## Build with:
 
 - React
