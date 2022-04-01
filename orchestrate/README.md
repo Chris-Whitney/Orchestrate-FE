@@ -44,3 +44,10 @@ To be complete:
 - add/remove friend
 - remove venue
 - remove group
+
+## Group Members:
+- Chris Whitney
+- Hannah Stanley
+- Craig Veevers
+- Teclaire Bahel
+
